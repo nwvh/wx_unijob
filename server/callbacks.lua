@@ -72,3 +72,15 @@ lib.callback.register(
         cuffedPlayers[target] = false
     end
 )
+
+-- [ STASHES ]
+
+lib.callback.register("wx_unijob:stashes:request", function()
+    for job, v in pairs(wx.Jobs) do
+        for _, data in pairs(v.stashes) do
+            exports.ox_inventory:RegisterStash((data.label:gsub(" ", "")):lower(), data.label, data.slots or 100,
+                (data.maxWeight or 100) * 1000, (not data.public and true or false), { [job] = data.minGrade or 0 },
+                data.location)
+        end
+    end
+end)

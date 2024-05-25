@@ -68,8 +68,12 @@ wx.Jobs = {
         },
         stashes = {
             {
-                label = "Kokot",
-                location = vec3(1, 1, 1),
+                label = "Evidence",
+                location = vec3(461.8699, -979.0797, 30.6896),
+                slots = 100,
+                maxWeight = 100,
+                minGrade = 4,
+                public = true
             }
         },
         garages = {
