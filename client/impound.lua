@@ -63,8 +63,9 @@ CreateThread(function()
             icon = "fas fa-car-burst",
             label = "Impound",
             canInteract = function(entity, distance, coords, name, bone)
+                local j = wx.GetJob()
                 for k, v in pairs(wx.Jobs) do
-                    if v.canAccess['impound'] then
+                    if v.canAccess['impound'] and k == j then
                         return true
                     end
                 end
