@@ -30,7 +30,6 @@ end)
 
 
 lib.callback.register('wx_unijob:impound:requestImpound', function(source, entity)
-    print(entity)
     if DoesEntityExist(NetworkGetEntityFromNetworkId(entity)) then
         DeleteEntity(NetworkGetEntityFromNetworkId(entity))
     end
