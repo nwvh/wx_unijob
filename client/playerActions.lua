@@ -107,7 +107,7 @@ local options = {
         distance = 2.0,
         label = "Handcuff",
         canInteract = function(entity, distance, coords, name, bone)
-            local job = exports.wx_bridge:GetJob()
+            local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
             if wx.Jobs[tostring(job)].canAccess['handcuff'] and not IsPedCuffed(entity) and CannotCuff() then
                 return true
@@ -115,7 +115,7 @@ local options = {
             return false
         end,
         onSelect = function(data)
-            local job = exports.wx_bridge:GetJob()
+            local job = wx.GetJob()
             local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
             HandcuffPlayer(data.entity)
         end
@@ -126,7 +126,7 @@ local options = {
         distance = 2.0,
         label = "Uncuff",
         canInteract = function(entity, distance, coords, name, bone)
-            local job = exports.wx_bridge:GetJob()
+            local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
             if wx.Jobs[tostring(job)].canAccess['handcuff'] and IsPedCuffed(entity) then
                 return true
@@ -134,7 +134,7 @@ local options = {
             return false
         end,
         onSelect = function(data)
-            local job = exports.wx_bridge:GetJob()
+            local job = wx.GetJob()
             local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
             UncuffPlayer(data.entity)
         end
@@ -145,7 +145,7 @@ local options = {
         icon = "fas fa-file-invoice-dollar",
         label = "Invoice",
         canInteract = function(entity, distance, coords, name, bone)
-            local job = exports.wx_bridge:GetJob()
+            local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
 
             if wx.Jobs[tostring(job)].canAccess['invoice'] then
@@ -154,7 +154,7 @@ local options = {
             return false
         end,
         onSelect = function(data)
-            local job = exports.wx_bridge:GetJob()
+            local job = wx.GetJob()
             local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
             local input = lib.inputDialog('Create an Invoice', {
                 { type = 'input',  label = 'Invoice Reason', description = 'Brief reason for the invoice', required = true, min = 4, max = 20 },

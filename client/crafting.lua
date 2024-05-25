@@ -17,7 +17,7 @@ CreateThread(function()
                     icon = 'fa-solid fa-wrench',
                     label = 'Open Crafting',
                     canInteract = function(entity, distance, coords, name, bone)
-                        local job = exports.wx_bridge:GetJob()
+                        local job = wx.GetJob()
                         return v.allowedJobs[job]
                     end,
                     onSelect = function(entity, distance, coords, name, bone)

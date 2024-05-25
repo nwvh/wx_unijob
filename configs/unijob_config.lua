@@ -42,7 +42,8 @@ wx.Jobs = {
         },
         bossMenu = {
             enable = true,
-            location = vec3(1, 1, 1)
+            location = vec3(442.5081, -975.0042, 30.6896),
+            minGrade = 4
         },
         cloakroom = {
             enable = true,
@@ -51,19 +52,19 @@ wx.Jobs = {
             }
         },
         grades = {
-            { id = 'cadet',           label = 'Cadet',           salary = 500,  bossMenu = false },
-            { id = 'officer1',        label = 'Officer I',       salary = 900,  bossMenu = false },
-            { id = 'officer2',        label = 'Officer II',      salary = 1000, bossMenu = false },
-            { id = 'officer3',        label = 'Officer III',     salary = 1500, bossMenu = false },
-            { id = 'officer31',       label = 'Officer III+I',   salary = 2000, bossMenu = false },
-            { id = 'sergeant1',       label = 'Sergeant I',      salary = 2500, bossMenu = false },
-            { id = 'sergeant2',       label = 'Sergeant II',     salary = 3000, bossMenu = false },
-            { id = 'lieutenant',      label = 'Lieutenant',      salary = 3500, bossMenu = false },
-            { id = 'captain',         label = 'Captain',         salary = 3300, bossMenu = false },
-            { id = 'commander',       label = 'Commander',       salary = 3400, bossMenu = false },
-            { id = 'deputy_chief',    label = 'Deputy chief',    salary = 3500, bossMenu = true },
-            { id = 'chief_assistant', label = 'Assistant chief', salary = 3700, bossMenu = true },
-            { id = 'boss',            label = 'Chief of police', salary = 4000, bossMenu = true }
+            { id = 'cadet',           label = 'Cadet',           salary = 500, },
+            { id = 'officer1',        label = 'Officer I',       salary = 900, },
+            { id = 'officer2',        label = 'Officer II',      salary = 1000, },
+            { id = 'officer3',        label = 'Officer III',     salary = 1500, },
+            { id = 'officer31',       label = 'Officer III+I',   salary = 2000, },
+            { id = 'sergeant1',       label = 'Sergeant I',      salary = 2500, },
+            { id = 'sergeant2',       label = 'Sergeant II',     salary = 3000, },
+            { id = 'lieutenant',      label = 'Lieutenant',      salary = 3500, },
+            { id = 'captain',         label = 'Captain',         salary = 3300, },
+            { id = 'commander',       label = 'Commander',       salary = 3400, },
+            { id = 'deputy_chief',    label = 'Deputy chief',    salary = 3500, },
+            { id = 'chief_assistant', label = 'Assistant chief', salary = 3700, },
+            { id = 'boss',            label = 'Chief of police', salary = 4000, }
         },
         stashes = {
             {

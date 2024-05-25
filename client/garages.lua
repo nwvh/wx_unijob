@@ -7,7 +7,7 @@ function OpenGarages(v, data, job)
         table.insert(opt, {
             title = car.label,
             icon = "car-side",
-            disabled = (exports.wx_bridge:GetJobGrade() < car.minGrade),
+            disabled = (wx.GetGrade() < car.minGrade),
             onSelect = function()
                 local veh = wx.SpawnVehicle(car.model, data.spawnLocation)
                 lastSpawnedVehicle = veh
@@ -74,7 +74,7 @@ CreateThread(function()
                         name = "wx_unijob:garage:choose",
                         icon = "fa-solid fa-warehouse",
                         canInteract = function(entity, distance, coords, name, bone)
-                            local j = exports.wx_bridge:GetJob()
+                            local j = wx.GetJob()
                             if job == j then
                                 return true
                             end
@@ -88,7 +88,7 @@ CreateThread(function()
                         name = "wx_unijob:garage:return",
                         icon = "fa-solid fa-car-side",
                         canInteract = function(entity, distance, coords, name, bone)
-                            local j = exports.wx_bridge:GetJob()
+                            local j = wx.GetJob()
                             if job == j and lastSpawnedVehicle ~= 0 then
                                 return true
                             end

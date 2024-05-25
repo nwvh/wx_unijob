@@ -38,8 +38,7 @@ function wx.OpenBossMenu(job)
                 menu.close()
             end
         end, {
-            grades = false,
-            salary = false
+            wash = false
         })
     elseif GetResourceState('qbx_management') == "started" then
         exports.qbx_management:OpenBossMenu('job')
@@ -213,4 +212,29 @@ function wx.SpawnPed(model, coords, data)
         TaskStartScenarioInPlace(spawnedped, data.scenario, 0, true)
     end
     return spawnedped
+end
+
+local lastGrade = 0
+local lastJob = "unemployed"
+
+CreateThread(function()
+    while true do
+        Wait(500)
+        local grade = exports.wx_bridge:GetJobGrade()
+        local job = wx.GetJob()
+        if grade ~= lastGrade then
+            lastGrade = grade
+        end
+        if job ~= lastJob then
+            lastJob = job
+        end
+    end
+end)
+
+wx.GetGrade = function()
+    return lastGrade
+end
+
+wx.GetJob = function()
+    return lastJob
 end
