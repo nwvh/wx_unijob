@@ -16,9 +16,9 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 | ✅      | Impound                     | Done and Functional                                                                                          |
 | ✅      | Invoices                    | Done and Functional                                                                                          |
 | ❓      | Handcuffing / Uncuffing     | Untested                                                                                                     |
-| 🔧      | Vehicle Repairing           | Being worked on                                                                                              |
+| ✅      | Vehicle Repairing           | Done and Functional                                                                                          |
 | ❌      | Automatic Job Creation      | TODO: Automatically insert jobs and it's grades from the config to the database if they're not there already |
-| ❌      | Bossmenu                    | TODO                                                                                                         |
-| ❌      | Vehicle Hijacking           | TODO                                                                                                         |
+| ✅      | Bossmenu                    | Done and Functional                                                                                          |
+| 🔧      | Vehicle Hijacking           | Being worked on                                                                                              |
 | ❌      | Player Escorting / Dragging | TODO                                                                                                         |
 | ❌      | Stashes                     | TODO                                                                                                         |
