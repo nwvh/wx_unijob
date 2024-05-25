@@ -1,5 +1,7 @@
 wx = {}
 
+wx.handcuffsItem = "handcuffs"
+
 wx.Crafting = {
     {
         location = vector4(639.1279, 254.6801, 102.1521, 64.8326),
