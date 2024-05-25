@@ -48,6 +48,8 @@ CreateThread(function()
 
                                     for i, c in pairs(b.neededItems) do
                                         if wx.GetItemCount(i) < c then
+                                            wx.Client.Notify("Crafting", "You are missing some items!", "wrench", "error")
+
                                             return lib.notify({
                                                 title = "Crafting",
                                                 icon = "wrench",
