@@ -76,7 +76,7 @@ wx.Jobs = {
                 location = vector4(451.5510, -1019.1321, 27.4515, 90.9102),
                 spawnLocation = vector4(439.7650, -1019.4845, 27.7254, 87.2493),
                 spawnInside = true,
-                type = "target",           -- [ target / textui ]
+                type = "textui",           -- [ target / textui ]
                 npc = `s_m_y_dockwork_01`, -- NPC for the target
                 vehicles = {
                     {

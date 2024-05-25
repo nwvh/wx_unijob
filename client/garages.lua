@@ -1,4 +1,63 @@
 local lastSpawnedVehicle = 0
+local displaying = false
+
+function OpenGarages(v, data, job)
+    local opt = {}
+    for _, car in pairs(data.vehicles) do
+        table.insert(opt, {
+            title = car.label,
+            icon = "car-side",
+            disabled = (exports.wx_bridge:GetJobGrade() < car.minGrade),
+            onSelect = function()
+                local veh = wx.SpawnVehicle(car.model, data.spawnLocation)
+                lastSpawnedVehicle = veh
+                if data.spawnInside then
+                    for i = 0, 200 do
+                        if IsPedInVehicle(cache.ped, veh, false) then break end
+                        TaskWarpPedIntoVehicle(cache.ped, veh, -1)
+                    end
+                end
+            end
+        })
+    end
+    lib.registerContext({
+        id = 'wx_unijob:garages:' .. job,
+        title = v.label,
+        options = opt
+    })
+
+    lib.showContext('wx_unijob:garages:' .. job)
+end
+
+function ReturnVehicle()
+    if lastSpawnedVehicle == 0 then return end
+    if not DoesEntityExist(lastSpawnedVehicle) then
+        lastSpawnedVehicle = 0
+        return lib.notify({
+            title = "Garages",
+            icon = "warehouse",
+            type = "error",
+            description = "The vehicle you're trying to return is unavailable"
+        })
+    end
+    local pedCoords = GetEntityCoords(cache.ped)
+    local vehCoords = GetEntityCoords(lastSpawnedVehicle)
+    if #(pedCoords - vehCoords) > 20.0 then
+        return lib.notify({
+            title = "Garages",
+            icon = "warehouse",
+            type = "error",
+            description = "The vehicle you're trying to return is too far"
+        })
+    end
+    lib.callback.await("wx_unijob:impound:requestImpound", false, VehToNet(lastSpawnedVehicle))
+    return lib.notify({
+        title = "Garages",
+        icon = "warehouse",
+        type = "success",
+        description = "Vehicle has been returned"
+    })
+end
 
 CreateThread(function()
     for job, v in pairs(wx.Jobs) do
@@ -21,31 +80,7 @@ CreateThread(function()
                             end
                         end,
                         onSelect = function(d)
-                            local opt = {}
-                            for _, car in pairs(data.vehicles) do
-                                table.insert(opt, {
-                                    title = car.label,
-                                    icon = "car-side",
-                                    disabled = (exports.wx_bridge:GetJobGrade() < car.minGrade),
-                                    onSelect = function()
-                                        local veh = wx.SpawnVehicle(car.model, data.spawnLocation)
-                                        lastSpawnedVehicle = veh
-                                        if data.spawnInside then
-                                            for i = 0, 200 do
-                                                if IsPedInVehicle(cache.ped, veh, false) then break end
-                                                TaskWarpPedIntoVehicle(cache.ped, veh, -1)
-                                            end
-                                        end
-                                    end
-                                })
-                            end
-                            lib.registerContext({
-                                id = 'wx_unijob:garages:' .. job,
-                                title = v.label,
-                                options = opt
-                            })
-
-                            lib.showContext('wx_unijob:garages:' .. job)
+                            OpenGarages(v, data, job)
                         end
                     },
                     {
@@ -59,36 +94,41 @@ CreateThread(function()
                             end
                         end,
                         onSelect = function(d)
-                            if lastSpawnedVehicle == 0 then return end
-                            if not DoesEntityExist(lastSpawnedVehicle) then
-                                lastSpawnedVehicle = 0
-                                return lib.notify({
-                                    title = "Garages",
-                                    icon = "warehouse",
-                                    type = "error",
-                                    description = "The vehicle you're trying to return is unavailable"
-                                })
-                            end
-                            local pedCoords = GetEntityCoords(cache.ped)
-                            local vehCoords = GetEntityCoords(lastSpawnedVehicle)
-                            if #(pedCoords - vehCoords) > 20.0 then
-                                return lib.notify({
-                                    title = "Garages",
-                                    icon = "warehouse",
-                                    type = "error",
-                                    description = "The vehicle you're trying to return is too far"
-                                })
-                            end
-                            lib.callback.await("wx_unijob:impound:requestImpound", false, VehToNet(lastSpawnedVehicle))
-                            return lib.notify({
-                                title = "Garages",
-                                icon = "warehouse",
-                                type = "success",
-                                description = "Vehicle has been returned"
-                            })
+                            ReturnVehicle()
                         end
                     },
                 })
+            else
+                local garage = lib.points.new({
+                    coords = data.location,
+                    distance = 5.0,
+                    job = v.label
+                })
+
+                function garage:onEnter()
+                    if not displaying then
+                        displaying = true
+                        lib.showTextUI("[E] - Job Garages  \n[G] Return Vehicle", {
+                            icon = "warehouse"
+                        })
+                    end
+                end
+
+                function garage:nearby()
+                    if IsControlJustReleased(0, 38) then
+                        OpenGarages(v, data, job)
+                    end
+                    if IsControlJustReleased(0, 58) then
+                        ReturnVehicle()
+                    end
+                end
+
+                function garage:onExit()
+                    if displaying then
+                        displaying = false
+                        lib.hideTextUI()
+                    end
+                end
             end
         end
     end
