@@ -16,7 +16,7 @@ CreateThread(function()
                         icon = "fa-solid fa-warehouse",
                         canInteract = function(entity, distance, coords, name, bone)
                             local j = exports.wx_bridge:GetJob()
-                            if job == j and lastSpawnedVehicle ~= 0 then
+                            if job == j then
                                 return true
                             end
                         end,
@@ -32,6 +32,7 @@ CreateThread(function()
                                         lastSpawnedVehicle = veh
                                         if data.spawnInside then
                                             for i = 0, 200 do
+                                                if IsPedInVehicle(cache.ped, veh, false) then break end
                                                 TaskWarpPedIntoVehicle(cache.ped, veh, -1)
                                             end
                                         end
