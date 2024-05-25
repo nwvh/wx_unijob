@@ -38,3 +38,9 @@ wx.Client.Notify = function(title, message, type, time)
         time = time
     })
 end
+
+---Custom function for lockpick
+
+wx.Client.Lockpick = function()
+    return exports['lockpick']:startLockpick()
+end
