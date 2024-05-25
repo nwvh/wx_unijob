@@ -169,9 +169,11 @@ local options = {
 }
 
 CreateThread(function()
-    while cuffed do
+    while true do
         Wait(0)
-        wx.DisableControls()
+        if cuffed then
+            wx.DisableControls()
+        end
     end
 end)
 
