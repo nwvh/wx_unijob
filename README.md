@@ -1,3 +1,5 @@
+![banner](./.assets/unijob.png)
+
 **This resource is EXPERIMENTAL, expect bugs and NO SUPPORT! PRs are welcome!**
 
 # About
