@@ -221,11 +221,10 @@ CreateThread(function()
     while true do
         Wait(500)
         local grade = exports.wx_bridge:GetJobGrade()
-        local job = wx.GetJob()
+        local job = exports.wx_bridge:GetJob()
         if grade ~= lastGrade then
             lastGrade = grade
-        end
-        if job ~= lastJob then
+        elseif job ~= lastJob then
             lastJob = job
         end
     end
