@@ -34,6 +34,7 @@ wx.Crafting = {                                                    -- Crafting o
 wx.Jobs = {
     ["police"] = {                                             -- Job name
         label = "Los Santos Police Department",                -- Label of the job
+        whitelisted = true,                                    -- Is job whitelisted
         blips = {                                              -- Blip Settings
             {
                 location = vec3(450.8468, -987.8705, 43.6915), -- Location of the blip
@@ -84,7 +85,7 @@ wx.Jobs = {
             { id = 'commander',       label = 'Commander',       salary = 3400, },
             { id = 'deputy_chief',    label = 'Deputy chief',    salary = 3500, },
             { id = 'chief_assistant', label = 'Assistant chief', salary = 3700, },
-            { id = 'boss',            label = 'Chief of police', salary = 4000, }
+            { id = 'boss',            label = 'Chief of police', salary = 4000, },
         },
         stashes = {                                            -- Stashes
             {
@@ -113,5 +114,5 @@ wx.Jobs = {
                 }
             }
         }
-    },
+    }
 }

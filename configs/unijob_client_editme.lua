@@ -1,6 +1,8 @@
 wx.Client = {}
 
 wx.Client.repairItem = "repairkit" ---@param item string Item that you need to repair vehicle
+wx.Client.lockpickItem = "lockpick" ---@param item string Item that you need to hijack vehicle
+wx.Client.needLockpick = true ---@param needLockpick boolean Player needs lockpick for hijacking vehicle
 
 ---Custom function for invoices
 ---@param target number Player ID of the receiver
