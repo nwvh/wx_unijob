@@ -16,6 +16,7 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 ![unijob-screenshot](./.assets/image-7.png)
 ![unijob-screenshot](./.assets/image-8.png)
 ![unijob-screenshot](./.assets/image-9.png)
+![unijob-screenshot](./.assets/silentalarm.png)
 
 # Config File
 ![unijob-config](./.assets/configfile.png)
@@ -44,7 +45,8 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 | ✅      | Put in / Take out of vehicle | Done  and Functional                                                                                    |
 | ✅      | Locales                      | Done and Functional                                                                                     |
 | ✅      | Blips                        | Done and Functional                                                                                     |
-| ✅      | (Discord) logging            | Being worked on                                                                                         |
+| ✅      | (Discord) logging            | Done and functional                                                                                     |
+| ✅      | Silent Alarm                 | Done and functional                                                                                     |
 | ❌      | Shops                        | TODO                                                                                                    |
 | ❌      | Item Collecting Points       | TODO                                                                                                    |
 | ❌      | Sell Points                  | TODO                                                                                                    |
