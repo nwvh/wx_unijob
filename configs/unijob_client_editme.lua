@@ -43,6 +43,10 @@ end
 
 wx.Client.Lockpick = function()
     return lib.skillCheck({ 'easy', 'easy', 'medium', 'medium', 'hard' }, { 'e' })
+    -- return exports['lockpick']:startLockpick()
+end
 
+wx.Client.HandcuffResist = function()
+    return lib.skillCheck({ 'medium', 'medium', 'medium' }, { 'e' })
     -- return exports['lockpick']:startLockpick()
 end

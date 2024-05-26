@@ -48,6 +48,11 @@ lib.callback.register('wx_unijob:handcuffs:setCuffed', function(source, player, 
     cuffedPlayers[player] = state
 end)
 
+lib.callback.register('wx_unijob:handcuffs:knockout', function(source, target)
+    cuffedPlayers[source] = false
+    TriggerClientEvent('wx_unijob:handcuffs:knockout', target)
+end)
+
 lib.callback.register(
     "wx_unijob:handcuff",
     function(source, target, data)
@@ -89,4 +94,22 @@ end)
 lib.callback.register("wx_unijob:idcard:request", function(source, target)
     local response = lib.callback.await("wx_unijob:idcard:request", target)
     return response
+end)
+
+-- [ ESCORT ]
+lib.callback.register("wx_unijob:drag:dragPlayer", function(source, target)
+    TriggerClientEvent('wx_unijob:drag:getDragged', target, source)
+end)
+
+lib.callback.register("wx_unijob:drag:stopDragging", function(source, target)
+    TriggerClientEvent('wx_unijob:drag:stopDragging', target, source)
+end)
+
+-- [ PUT IN / OUT ]
+lib.callback.register("wx_unijob:vehicles:putIn", function(_, target)
+    TriggerClientEvent('wx_unijob:vehicles:getIn', target)
+end)
+
+lib.callback.register("wx_unijob:vehicles:putOut", function(_, target)
+    TriggerClientEvent('wx_unijob:vehicles:getOut', target)
 end)

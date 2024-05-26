@@ -4,11 +4,9 @@ lib.callback.register('wx_unijob:idcard:request', function()
         content = 'A nearby officer is requesting your ID Card!',
         centered = true,
         cancel = true,
-        labels = { confirm = "Show your ID Card", "Reject" }
+        labels = { confirm = "Show your ID Card", cancel = "Reject" }
     })
     local playerData = exports.wx_bridge:GetPlayerData()
-    print(json.encode(playerData, { indent = true }))
-
     local data = {
         firstName = playerData.firstName,
         lastName = playerData.lastName,
