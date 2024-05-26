@@ -14,14 +14,14 @@ end
 
 local options = {
     {
-        name = 'wx_unijob:lockpick:target',
+        name = "wx_unijob:lockpick:target",
         icon = "fas fa-car",
         distance = 2.0,
         label = locale("lockpickTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
             for k, v in pairs(wx.Jobs) do
-                if v.canAccess['hijack'] and k == j and (CanLockpick(entity)) then
+                if v.canAccess["hijack"] and k == j and (CanLockpick(entity)) then
                     return true
                 end
             end

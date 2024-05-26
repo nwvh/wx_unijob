@@ -58,6 +58,10 @@
     "idCardHeight": "Výška",
     "idCardRejected": "Osoba odmítla ukázat doklady",
     "idCardAccepted": "Osoba vám předložila doklady",
+    "idCardRequestTitle": "Vyžádání dokladů",
+    "idCardRequestDesc": "Policista poblíž si vyžádal vaše doklady",
+    "idCardRequestAccept": "Předložit doklady",
+    "idCardRequestRefuse": "Odmítnout",
     "putInTarget": "Dát do vozidla",
     "putOutTarget": "Vytáhnout z vozidla"
 }

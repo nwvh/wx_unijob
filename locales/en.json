@@ -58,6 +58,10 @@
     "idCardHeight": "Height",
     "idCardRejected": "The person refused to show their ID",
     "idCardAccepted": "The person shown you their ID",
+    "idCardRequestTitle": "ID Card Request",
+    "idCardRequestDesc": "An officer nearby has requested your ID Card",
+    "idCardRequestAccept": "Show your ID Card",
+    "idCardRequestRefuse": "Refuse",
     "putInTarget": "Put In Vehicle",
     "putOutTarget": "Take out from vehicle"
 }
