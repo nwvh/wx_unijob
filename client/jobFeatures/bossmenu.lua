@@ -1,4 +1,5 @@
 local displaying = false
+lib.locale()
 
 CreateThread(function()
     for job, v in pairs(wx.Jobs) do
@@ -13,7 +14,7 @@ CreateThread(function()
             if wx.GetGrade() >= v.bossMenu.minGrade then
                 if not displaying then
                     displaying = true
-                    lib.showTextUI("[E] - Boss Menu", {
+                    lib.showTextUI(locale("bossMenuTextUI"), {
                         icon = "briefcase"
                     })
                 end

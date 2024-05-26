@@ -14,7 +14,7 @@ CreateThread(function()
                 if wx.GetJob() == job then
                     if not displaying then
                         displaying = true
-                        lib.showTextUI("[E] - Cloakroom", {
+                        lib.showTextUI(locale("cloakroomTextUI"), {
                             icon = "shirt"
                         })
                     end

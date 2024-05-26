@@ -2,9 +2,9 @@ function fixCar(veh)
     local vehW = GetEntityHeading(veh)
     local vehC = GetEntityCoords(veh)
     SetVehicleDoorOpen(veh, 4, false, false)
-    if wx.ProgressBar(nil, 5000, "Repairing vehicle", true, true, { dict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@", clip = "machinic_loop_mechandplayer" }) then
+    if wx.ProgressBar(nil, 5000, locale("repairProgress"), true, true, { dict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@", clip = "machinic_loop_mechandplayer" }) then
         SetVehicleDoorShut(veh, 4, false)
-        wx.Client.Notify("Mechanic", "Vehicle was repaired", "success", "wrench", 5000)
+        wx.Client.Notify(locale("repairTitle"), locale("repairDone"), "success", "wrench", 5000)
         Wait(500)
         SetVehicleFixed(veh)
         SetVehicleDeformationFixed(veh)
@@ -19,11 +19,11 @@ local options = {
         name = 'wx_unijob:repair:target',
         icon = "fas fa-wrench",
         distance = 2.0,
-        label = "Repair vehicle",
+        label = locale("repairTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
             for k, v in pairs(wx.Jobs) do
-                if v.canAccess['impound'] and k == j and IsVehicleDamaged(entity) then
+                if v.canAccess['repair'] and k == j and IsVehicleDamaged(entity) then
                     return true
                 end
             end

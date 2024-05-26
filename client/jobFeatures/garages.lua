@@ -34,15 +34,16 @@ function ReturnVehicle()
     if lastSpawnedVehicle == 0 then return end
     if not DoesEntityExist(lastSpawnedVehicle) then
         lastSpawnedVehicle = 0
-        return wx.Client.Notify("Garages", "The vehicle you're trying to return is unavailable", "error", "warehouse")
+        return wx.Client.Notify(locale("garagesTitle"), locale("garagesVehicleMissing"), "error", "warehouse")
     end
     local pedCoords = GetEntityCoords(cache.ped)
     local vehCoords = GetEntityCoords(lastSpawnedVehicle)
     if #(pedCoords - vehCoords) > 20.0 then
-        return wx.Client.Notify("Garages", "The vehicle you're trying to return is too far", "error", "warehouse")
+        return wx.Client.Notify(locale("garagesTitle"), locale("garagesVehicleFar"), "error",
+            "warehouse")
     end
     lib.callback.await("wx_unijob:impound:requestImpound", false, VehToNet(lastSpawnedVehicle))
-    return wx.Client.Notify("Garages", "Vehicle has been returned", "success", "warehouse")
+    return wx.Client.Notify(locale("garagesTitle"), locale("garagesVehicleReturned"), "success", "warehouse")
 end
 
 CreateThread(function()
@@ -56,7 +57,7 @@ CreateThread(function()
                 })
                 exports.ox_target.addLocalEntity(_ENV, (ped), {
                     {
-                        label = "Open Garage",
+                        label = locale("garagesTarget"),
                         name = "wx_unijob:garage:choose",
                         icon = "fa-solid fa-warehouse",
                         distance = 2.0,
@@ -71,7 +72,7 @@ CreateThread(function()
                         end
                     },
                     {
-                        label = "Return Vehicle",
+                        label = locale("garagesTargetReturn"),
                         name = "wx_unijob:garage:return",
                         icon = "fa-solid fa-car-side",
                         distance = 2.0,
@@ -96,7 +97,7 @@ CreateThread(function()
                 function garage:onEnter()
                     if not displaying then
                         displaying = true
-                        lib.showTextUI("[E] - Job Garages  \n[G] Return Vehicle", {
+                        lib.showTextUI(locale("garagesTextUI"), {
                             icon = "warehouse"
                         })
                     end

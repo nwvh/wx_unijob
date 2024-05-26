@@ -1,6 +1,6 @@
 function CleanVehicle(veh)
     SetPedCurrentWeaponVisible(cache.ped, false, false)
-    if wx.ProgressBar(nil, 5000, "Cleaning vehicle", true, true, { dict = "timetable@floyd@clean_kitchen@base", clip = "base" }, {
+    if wx.ProgressBar(nil, 5000, locale("cleanProgress"), true, true, { dict = "timetable@floyd@clean_kitchen@base", clip = "base" }, {
             model = `prop_sponge_01`,
             bone = 28422,
             pos = {
@@ -26,7 +26,7 @@ local options = {
         name = 'wx_unijob:clean:target',
         icon = "fas fa-soap",
         distance = 2.0,
-        label = "Clean vehicle",
+        label = locale("cleanTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
             for k, v in pairs(wx.Jobs) do

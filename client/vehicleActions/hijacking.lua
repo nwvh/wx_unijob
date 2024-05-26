@@ -1,9 +1,9 @@
-function lockpick(veh)
+function Lockpick(veh)
     if wx.Client.Lockpick() then
-        wx.Client.Notify("Lockpick", "You have unlocked the vehicle!", "success", "lock-open")
+        wx.Client.Notify(locale("lockpickTitle"), locale("lockpickSuccess"), "success", "lock-open")
         SetVehicleDoorsLocked(veh, 1)
     else
-        wx.Client.Notify("Lockpick", "You have failed to unlocked the vehicle!", "error", "lock-open")
+        wx.Client.Notify(locale("lockpickTitle"), locale("lockpickFailed"), "error", "lock-open")
     end
 end
 
@@ -17,7 +17,7 @@ local options = {
         name = 'wx_unijob:lockpick:target',
         icon = "fas fa-car",
         distance = 2.0,
-        label = "Lockpick vehicle",
+        label = locale("lockpickTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
             for k, v in pairs(wx.Jobs) do
@@ -28,7 +28,7 @@ local options = {
             return false
         end,
         onSelect = function(data)
-            lockpick(data.entity)
+            Lockpick(data.entity)
         end
     }
 }

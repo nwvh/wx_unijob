@@ -8,7 +8,7 @@ CreateThread(function()
 
                 options = {
                     {
-                        label = ("Open Stash - [%s]"):format(data.label),
+                        label = locale("stashesTarget", data.label),
                         icon = "fas fa-box",
                         distance = 1.0,
                         canInteract = function(entity, distance, coords, name, bone)

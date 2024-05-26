@@ -22,17 +22,17 @@ function HandcuffPlayer(ped)
     local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))
     local handcuffed = lib.callback.await('wx_unijob:handcuffs:isCuffed', false, target)
     if handcuffed then
-        return wx.Client.Notify("Handcuffs", "This person is already handcuffed", "error", "handcuffs")
+        return wx.Client.Notify(locale("handcuffsTitle"), locale("handcuffsAlready"), "error", "handcuffs")
     end
     if wx.GetItemCount(wx.handcuffsItem) < 1 then
-        return wx.Client.Notify("Handcuffs", "You don't have any handcuffs", "error", "handcuffs")
+        return wx.Client.Notify(locale("handcuffsTitle"), locale("handcuffsMissing"), "error", "handcuffs")
     end
     if not IsPedAPlayer(ped) then return end
     local heading = GetEntityHeading(cache.ped)
     local location = GetEntityForwardVector(cache.ped)
     local coords = GetEntityCoords(cache.ped)
     lib.callback.await('wx_unijob:handcuff', false, target, {
-        item = "money",
+        item = wx.handcuffsItem,
         heading = heading,
         loc = location,
         coords = coords
@@ -44,7 +44,7 @@ function UncuffPlayer(ped)
     local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))
     local handcuffed = lib.callback.await('wx_unijob:handcuffs:isCuffed', false, target)
     if not handcuffed and not IsPedCuffed(ped) then
-        return wx.Client.Notify("Handcuffs", "This person is not handcuffed", "error", "handcuffs")
+        return wx.Client.Notify(locale("handcuffsTitle"), locale("handcuffsNot"), "error", "handcuffs")
     end
     if not IsPedAPlayer(ped) then return end
     local heading = GetEntityHeading(cache.ped)
@@ -61,7 +61,7 @@ function UncuffPlayer(ped)
 end
 
 RegisterNetEvent('wx_unijob:handcuffs:getCuffed', function(cuffer, heading, loc, coords)
-    wx.Client.Notify("Handcuffs", "You are being handcuffed!", "warning", "handcuffs")
+    wx.Client.Notify(locale("handcuffsTitle"), locale("handcuffsAlert"), "warning", "handcuffs")
     SetEnableHandcuffs(cache.ped, true)
     SetCurrentPedWeapon(cache.ped, `WEAPON_UNARMED`, true)
     local x, y, z = table.unpack(coords + loc * 1.0)
@@ -80,7 +80,8 @@ RegisterNetEvent('wx_unijob:handcuffs:getCuffed', function(cuffer, heading, loc,
                 lib.callback.await("wx_unijob:handcuffs:knockout", false, cuffer)
                 ClearPedTasks(cache.ped)
                 SetEnableHandcuffs(cache.ped, false)
-                wx.Client.Notify("Handcuffs", "You have escaped from being handcuffed!", "warning", "handcuffs")
+                wx.Client.Notify(locale("handcuffsTitle"), locale("handcuffsEscapedSelf"), "warning",
+                    "handcuffs")
                 return
             end
         end
@@ -111,7 +112,7 @@ RegisterNetEvent('wx_unijob:handcuffs:knockout', function()
         SetEntityHealth(cache.ped, health)
     end
     SetPedToRagdoll(cache.ped, 2000, 2000, 0, 0, 0, 0)
-    return wx.Client.Notify("Handcuffs", "The person has escaped!", "warning", "handcuffs")
+    return wx.Client.Notify(locale("handcuffsTitle"), locale("handcuffsEscaped"), "warning", "handcuffs")
 end)
 
 
@@ -178,7 +179,7 @@ local options = {
         name = 'wx_unijob:handcuff:target',
         icon = "fas fa-handcuffs",
         distance = 2.0,
-        label = "Handcuff",
+        label = locale("handcuffsTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
@@ -197,7 +198,7 @@ local options = {
         name = 'wx_unijob:uncuff:target',
         icon = "fas fa-handcuffs",
         distance = 2.0,
-        label = "Uncuff",
+        label = locale("uncuffTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
@@ -207,8 +208,6 @@ local options = {
             return false
         end,
         onSelect = function(data)
-            local job = wx.GetJob()
-            local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
             UncuffPlayer(data.entity)
         end
     },
@@ -216,7 +215,7 @@ local options = {
         name = 'wx_unijob:drag:target',
         icon = "fas fa-handshake-angle",
         distance = 2.0,
-        label = "Escort",
+        label = locale("escortTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
@@ -237,7 +236,7 @@ local options = {
         name = 'wx_unijob:undrag:target',
         icon = "fas fa-handshake-angle",
         distance = 2.0,
-        label = "Stop Escorting",
+        label = locale("escortStopTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
@@ -258,7 +257,7 @@ local options = {
 
         name = 'wx_unijob:invoice:target',
         icon = "fas fa-file-invoice-dollar",
-        label = "Invoice",
+        label = locale("invoiceTarget"),
         distance = 2.0,
         canInteract = function(entity, distance, coords, name, bone)
             local job = wx.GetJob()
@@ -272,13 +271,13 @@ local options = {
         onSelect = function(data)
             local job = wx.GetJob()
             local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
-            local input = lib.inputDialog('Create an Invoice', {
-                { type = 'input',  label = 'Invoice Reason', description = 'Brief reason for the invoice', required = true, min = 4, max = 20 },
-                { type = 'number', label = 'Invoice Amount', description = 'Amount of the invoice',        required = true, min = 1 },
+            local input = lib.inputDialog(locale("invoiceCreationTitle"), {
+                { type = 'input',  label = locale("invoiceCreationReason"), description = locale("invoiceCreationReasonDesc"), required = true, min = 4, max = 20 },
+                { type = 'number', label = locale("invoiceCreationAmount"), description = locale("invoiceCreationAmountDesc"), required = true, min = 1 },
             })
             if input then
                 wx.Client.Invoice(target, input[2], input[1], job)
-                wx.Client.Notify("Invoice", "You have sent an invoice for $" .. input[2], "success",
+                wx.Client.Notify(locale("invoiceTitle"), locale("invoiceSent", input[2]), "success",
                     "file-invoice-dollar", 5000)
             end
         end
@@ -287,7 +286,7 @@ local options = {
 
         name = 'wx_unijob:id:target',
         icon = "fas fa-id-card",
-        label = "ID Card",
+        label = locale("idCardTarget"),
         distance = 2.0,
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
@@ -301,35 +300,36 @@ local options = {
         onSelect = function(data)
             local job = wx.GetJob()
             local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
-            wx.Client.Notify("ID Card", "You have requested the ID Card from this person", "info", "id-card", 5000)
+            wx.Client.Notify(locale("idCardTitle"), locale("idCardRequested"), "info", "id-card",
+                5000)
             local result = lib.callback.await("wx_unijob:idcard:request", false, target)
             if type(result) == "table" then
                 lib.registerContext({
                     id = 'wx_unijob:idcard:result',
-                    title = "ID Card",
+                    title = locale("idCardTitle"),
                     options = {
                         {
-                            title = "First Name",
+                            title = locale("idCardFirstName"),
                             icon = "user",
                             description = result.firstName
                         },
                         {
-                            title = "Last Name",
+                            title = locale("idCartLastName"),
                             icon = "user",
                             description = result.lastName
                         },
                         {
-                            title = "Date of Birth",
+                            title = locale("idCardDob"),
                             icon = "calendar-days",
                             description = result.dob
                         },
                         {
-                            title = "Sex",
+                            title = locale("idCardSex"),
                             icon = result.sex == "Female" and "venus" or "mars",
                             description = result.sex
                         },
                         {
-                            title = "Height",
+                            title = locale("idCardHeight"),
                             icon = "ruler-vertical",
                             description = ("%s cm"):format(result.height)
                         },
@@ -337,9 +337,11 @@ local options = {
                 })
 
                 lib.showContext('wx_unijob:idcard:result')
-                wx.Client.Notify("ID Card", "The person has shown you their ID Card", "success", "id-card", 5000)
+                wx.Client.Notify(locale("idCardTitle"), locale("idCardAccepted"), "success", "id-card",
+                    5000)
             else
-                wx.Client.Notify("ID Card", "The person rejected your ID Card request", "error", "id-card", 5000)
+                wx.Client.Notify(locale("idCardTitle"), locale("idCardRejected"), "error", "id-card",
+                    5000)
             end
         end
     },
@@ -368,7 +370,6 @@ RegisterNetEvent('wx_unijob:vehicles:getIn', function()
 end)
 
 RegisterNetEvent('wx_unijob:vehicles:getOut', function()
-    print("leaving")
     TaskLeaveVehicle(cache.ped, GetVehiclePedIsUsing(cache.ped), 0)
 end)
 
@@ -377,7 +378,7 @@ local vehicleOptions = {
         name = 'wx_unijob:vehicle:putIn',
         icon = "fas fa-hand-point-right",
         distance = 2.0,
-        label = "Put In",
+        label = locale("putInTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
             for k, v in pairs(wx.Jobs) do
@@ -397,7 +398,7 @@ local vehicleOptions = {
         name = 'wx_unijob:vehicle:putOut',
         icon = "fas fa-hand-point-left",
         distance = 2.0,
-        label = "Drag out",
+        label = locale("putOutTarget"),
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
             for k, v in pairs(wx.Jobs) do

@@ -15,7 +15,7 @@ CreateThread(function()
                 {
                     name = 'wx_unijob:crafting:showCrafting',
                     icon = 'fa-solid fa-wrench',
-                    label = 'Open Crafting',
+                    label = locale("craftingTarget"),
                     distance = 1.0,
                     canInteract = function(entity, distance, coords, name, bone)
                         local job = wx.GetJob()
@@ -42,7 +42,7 @@ CreateThread(function()
                             table.insert(opt, {
                                 title = ("%s %s"):format((b.count == 1 and "" or ("(%sx)"):format(b.count)),
                                     wx.GetItemName(b.item)),
-                                description = "Hover over to see the recipe",
+                                description = locale("craftingDesc"),
                                 icon = "wrench",
                                 metadata = metadata,
                                 onSelect = function()
@@ -52,11 +52,12 @@ CreateThread(function()
 
                                     for i, c in pairs(b.neededItems) do
                                         if wx.GetItemCount(i) < c then
-                                            return wx.Client.Notify("Crafting", "You are missing some items!", "error",
+                                            return wx.Client.Notify(locale("craftingTitle"),
+                                                locale("craftingMissing"), "error",
                                                 "wrench")
                                         end
                                     end
-                                    if wx.ProgressBar(nil, time, ("Crafting %s"):format(wx.GetItemName(item)), false, true, {
+                                    if wx.ProgressBar(nil, time, locale("craftingProgress", wx.GetItemName(item)), false, true, {
                                             dict = 'mini@repair',
                                             clip = 'fixing_a_ped'
                                         }) then
@@ -70,7 +71,7 @@ CreateThread(function()
                         end
                         lib.registerContext({
                             id = 'unijob_crafting',
-                            title = 'Crafting',
+                            title = locale("craftingTitle"),
                             options = opt
                         })
                         lib.showContext("unijob_crafting")
