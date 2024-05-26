@@ -1,4 +1,5 @@
 local cuffed = false
+local canEscape = true
 
 local function CannotCuff(ped)
     return IsPedFatallyInjured(ped)
@@ -20,7 +21,6 @@ end
 function HandcuffPlayer(ped)
     local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))
     local handcuffed = lib.callback.await('wx_unijob:handcuffs:isCuffed', false, target)
-    print(handcuffed)
     if handcuffed then
         return wx.Client.Notify("Handcuffs", "This person is already handcuffed", "error", "handcuffs")
     end
@@ -31,14 +31,12 @@ function HandcuffPlayer(ped)
     local heading = GetEntityHeading(cache.ped)
     local location = GetEntityForwardVector(cache.ped)
     local coords = GetEntityCoords(cache.ped)
-    print("callback")
     lib.callback.await('wx_unijob:handcuff', false, target, {
         item = "money",
         heading = heading,
         loc = location,
         coords = coords
     })
-    print("callback ok")
     CuffAnim()
 end
 
@@ -63,6 +61,7 @@ function UncuffPlayer(ped)
 end
 
 RegisterNetEvent('wx_unijob:handcuffs:getCuffed', function(cuffer, heading, loc, coords)
+    wx.Client.Notify("Handcuffs", "You are being handcuffed!", "warning", "handcuffs")
     SetEnableHandcuffs(cache.ped, true)
     SetCurrentPedWeapon(cache.ped, `WEAPON_UNARMED`, true)
     local x, y, z = table.unpack(coords + loc * 1.0)
@@ -71,6 +70,21 @@ RegisterNetEvent('wx_unijob:handcuffs:getCuffed', function(cuffer, heading, loc,
     Wait(250)
     lib.requestAnimDict('mp_arrest_paired')
     TaskPlayAnim(cache.ped, 'mp_arrest_paired', 'crook_p2_back_right', 8.0, -8, 3750, 2, 0, 0, 0, 0)
+    if wx.handcuffsCanBreak then
+        if canEscape then
+            canEscape = false
+            SetTimeout(60 * 1000, function()
+                canEscape = true
+            end)
+            if wx.Client.HandcuffResist() then
+                lib.callback.await("wx_unijob:handcuffs:knockout", false, cuffer)
+                ClearPedTasks(cache.ped)
+                SetEnableHandcuffs(cache.ped, false)
+                wx.Client.Notify("Handcuffs", "You have escaped from being handcuffed!", "warning", "handcuffs")
+                return
+            end
+        end
+    end
     Wait(3760)
     RemoveAnimDict('mp_arrest_paired')
     cuffed = true
@@ -79,10 +93,84 @@ RegisterNetEvent('wx_unijob:handcuffs:getCuffed', function(cuffer, heading, loc,
     RemoveAnimDict('mp_arresting')
 end)
 RegisterNetEvent('wx_unijob:handcuffs:getUncuffed', function(cuffer, heading, loc, coords)
+    FreezeEntityPosition(cache.ped, true)
+    local x, y, z = table.unpack(coords + loc * 1.0)
+    SetEntityHeading(cache.ped, heading)
+    Wait(5500)
+    SetEntityCoords(cache.ped, x, y, z - 0.9)
     SetEnableHandcuffs(cache.ped, false)
     ClearPedTasks(cache.ped)
     SetCurrentPedWeapon(cache.ped, `WEAPON_UNARMED`, true)
     cuffed = false
+    FreezeEntityPosition(cache.ped, false)
+end)
+
+RegisterNetEvent('wx_unijob:handcuffs:knockout', function()
+    local health = GetEntityHealth(cache.ped) - 10
+    if health >= 5 then
+        SetEntityHealth(cache.ped, health)
+    end
+    SetPedToRagdoll(cache.ped, 2000, 2000, 0, 0, 0, 0)
+    return wx.Client.Notify("Handcuffs", "The person has escaped!", "warning", "handcuffs")
+end)
+
+
+-- Taken and edited from https://github.com/overextended/ox_police/blob/5b8fac5692b0bf45b78bbc6b9a036e0a10d3ec1c/client/escort.lua#L49
+local isEscorted = false
+local isEscorting = false
+local escortingPlayerId = 0
+local dict = 'anim@move_m@prisoner_cuffed'
+local dict2 = 'anim@move_m@trash'
+function Escort(serverId)
+    while isEscorted do
+        local player = GetPlayerFromServerId(serverId)
+        local ped = player > 0 and GetPlayerPed(player)
+
+        if not ped then break end
+
+        if not IsEntityAttachedToEntity(cache.ped, ped) then
+            AttachEntityToEntity(cache.ped, ped, 11816, 0.54, 0.54, 0.0, 0.0, 0.0, 0.0, false, false, true, true, 2, true)
+        end
+
+        if IsPedWalking(ped) then
+            if not IsEntityPlayingAnim(cache.ped, dict, 'walk', 3) then
+                lib.requestAnimDict(dict)
+                TaskPlayAnim(cache.ped, dict, 'walk', 8.0, -8, -1, 1, 0.0, false, false, false)
+            end
+        elseif IsPedRunning(ped) or IsPedSprinting(ped) then
+            if not IsEntityPlayingAnim(cache.ped, dict2, 'run', 3) then
+                lib.requestAnimDict(dict2)
+                TaskPlayAnim(cache.ped, dict2, 'run', 8.0, -8, -1, 1, 0.0, false, false, false)
+            end
+        else
+            StopAnimTask(cache.ped, dict, 'walk', -8.0)
+            StopAnimTask(cache.ped, dict2, 'run', -8.0)
+        end
+
+        Wait(0)
+    end
+
+    RemoveAnimDict(dict)
+    RemoveAnimDict(dict2)
+end
+
+RegisterNetEvent('wx_unijob:drag:getDragged', function(src)
+    isEscorted = true
+    Escort(src)
+end)
+
+
+function StopEscort()
+    isEscorted = false
+    if IsEntityAttached(cache.ped) then
+        StopAnimTask(cache.ped, dict, 'walk', -8.0)
+        StopAnimTask(cache.ped, dict2, 'run', -8.0)
+        DetachEntity(cache.ped, true, false)
+    end
+end
+
+RegisterNetEvent('wx_unijob:drag:stopDragging', function(src)
+    StopEscort()
 end)
 
 local options = {
@@ -106,7 +194,7 @@ local options = {
         end
     },
     {
-        name = 'wx_unijob:handcuff:target',
+        name = 'wx_unijob:uncuff:target',
         icon = "fas fa-handcuffs",
         distance = 2.0,
         label = "Uncuff",
@@ -122,6 +210,48 @@ local options = {
             local job = wx.GetJob()
             local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
             UncuffPlayer(data.entity)
+        end
+    },
+    {
+        name = 'wx_unijob:drag:target',
+        icon = "fas fa-handshake-angle",
+        distance = 2.0,
+        label = "Escort",
+        canInteract = function(entity, distance, coords, name, bone)
+            local job = wx.GetJob()
+            if not wx.Jobs[tostring(job)] then return false end
+            if wx.Jobs[tostring(job)].canAccess['drag'] and IsPedCuffed(entity) and not IsEntityAttached(entity) then
+                return true
+            end
+            return false
+        end,
+        onSelect = function(data)
+            local job = wx.GetJob()
+            local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
+            escortingPlayerId = target
+            lib.callback.await("wx_unijob:drag:dragPlayer", false, target)
+            isEscorting = true
+        end
+    },
+    {
+        name = 'wx_unijob:undrag:target',
+        icon = "fas fa-handshake-angle",
+        distance = 2.0,
+        label = "Stop Escorting",
+        canInteract = function(entity, distance, coords, name, bone)
+            local job = wx.GetJob()
+            if not wx.Jobs[tostring(job)] then return false end
+            if wx.Jobs[tostring(job)].canAccess['drag'] and IsPedCuffed(entity) and IsEntityAttached(entity) then
+                return true
+            end
+            return false
+        end,
+        onSelect = function(data)
+            local job = wx.GetJob()
+            local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
+            escortingPlayerId = 0
+            lib.callback.await("wx_unijob:drag:stopDragging", false, target)
+            isEscorting = false
         end
     },
     {
@@ -224,4 +354,66 @@ CreateThread(function()
     end
 end)
 
+RegisterNetEvent('wx_unijob:vehicles:getIn', function()
+    StopEscort()
+    local veh = lib.getClosestVehicle(GetEntityCoords(cache.ped), 5.0, false)
+
+    local foundSeat = nil
+    for i = -1, GetVehicleMaxNumberOfPassengers(veh) - 1 do
+        if i ~= -1 or i ~= 1 then
+            foundSeat = i
+        end
+    end
+    TaskEnterVehicle(cache.ped, veh, -1, foundSeat, 1)
+end)
+
+RegisterNetEvent('wx_unijob:vehicles:getOut', function()
+    print("leaving")
+    TaskLeaveVehicle(cache.ped, GetVehiclePedIsUsing(cache.ped), 0)
+end)
+
+local vehicleOptions = {
+    {
+        name = 'wx_unijob:vehicle:putIn',
+        icon = "fas fa-hand-point-right",
+        distance = 2.0,
+        label = "Put In",
+        canInteract = function(entity, distance, coords, name, bone)
+            local j = wx.GetJob()
+            for k, v in pairs(wx.Jobs) do
+                if v.canAccess['putIn'] and k == j and isEscorting and escortingPlayerId ~= 0 then
+                    return true
+                end
+            end
+            return false
+        end,
+        onSelect = function(data)
+            lib.callback.await("wx_unijob:vehicles:putIn", false, escortingPlayerId)
+            isEscorting = false
+            escortingPlayerId = 0
+        end
+    },
+    {
+        name = 'wx_unijob:vehicle:putOut',
+        icon = "fas fa-hand-point-left",
+        distance = 2.0,
+        label = "Drag out",
+        canInteract = function(entity, distance, coords, name, bone)
+            local j = wx.GetJob()
+            for k, v in pairs(wx.Jobs) do
+                if v.canAccess['putIn'] and k == j and not isEscorting and GetVehicleNumberOfPassengers(entity) >= 1 then
+                    return true
+                end
+            end
+            return false
+        end,
+        onSelect = function(data)
+            local player = lib.getClosestPlayer(GetEntityCoords(data.entity), 2.0, false)
+
+            lib.callback.await("wx_unijob:vehicles:putOut", false, GetPlayerServerId(player))
+        end
+    },
+}
+
+exports.ox_target:addGlobalVehicle(vehicleOptions)
 exports.ox_target.addGlobalPlayer(_ENV, options)
