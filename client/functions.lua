@@ -237,3 +237,11 @@ end
 wx.GetJob = function()
     return lastJob
 end
+
+wx.TableSize = function(t)
+    local size = 0
+    for k, v in pairs(t) do
+        size += 1
+    end
+    return size
+end

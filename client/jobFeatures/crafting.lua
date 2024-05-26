@@ -16,8 +16,12 @@ CreateThread(function()
                     name = 'wx_unijob:crafting:showCrafting',
                     icon = 'fa-solid fa-wrench',
                     label = 'Open Crafting',
+                    distance = 1.0,
                     canInteract = function(entity, distance, coords, name, bone)
                         local job = wx.GetJob()
+                        if wx.TableSize(v.allowedJobs) == 0 then
+                            return true
+                        end
                         return v.allowedJobs[job]
                     end,
                     onSelect = function(entity, distance, coords, name, bone)
