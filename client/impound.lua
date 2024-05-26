@@ -15,7 +15,7 @@ end
 function Impound(entity)
     for i = -1, GetVehicleModelNumberOfSeats(GetHashKey(entity)) do
         if not IsVehicleSeatFree(entity, i) then
-            return wx.Client.Notify("Impound", "The vehicle you're trying to impound is occupied", "car-side", "error")
+            return wx.Client.Notify("Impound", "The vehicle you're trying to impound is occupied", "error", "car", 5000)
         end
     end
 
@@ -37,7 +37,7 @@ function Impound(entity)
         local entityCoords = GetEntityCoords(entity)
         local playerCoords = GetEntityCoords(cache.ped)
         if #(playerCoords - entityCoords) > 5 then
-            return wx.Client.Notify("Impound", "The vehicle you're trying to impound is too far", "car-side", "error")
+            return wx.Client.Notify("Impound", "The vehicle you're trying to impound is too far", "error", "car", 5000)
         end
         DeleteEntity(prop)
         lib.callback.await("wx_unijob:impound:requestImpound", false, (VehToNet(entity)))
