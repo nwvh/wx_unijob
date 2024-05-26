@@ -13,6 +13,8 @@
     "garagesVehicleMissing": "Vozidlo které se snažíš zaparkovat neexistuje",
     "garagesVehicleFar": "Vozidlo které se snažíš zaparkovat je moc daleko",
     "garagesVehicleReturned": "Vozidlo bylo navráceno",
+    "garagesParkedOut": "Vozidlo %s bylo vytaženo z garáže",
+    "garagesSpawnpointOccupied": "Všechna místa pro vyparkování jsou obsazená!",
     "stashesTarget": "Otevřít sklad - [%s]",
     "cleanTarget": "Umýt vozidlo",
     "cleanProgress": "Umýváš vozidlo...",

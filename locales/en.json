@@ -13,6 +13,8 @@
     "garagesVehicleMissing": "The vehicle you're trying to return is unavailable",
     "garagesVehicleFar": "The vehicle you're trying to return is unavailable",
     "garagesVehicleReturned": "Vehicle has been returned",
+    "garagesParkedOut": "Your vehicle %s has been parked out",
+    "garagesSpawnpointOccupied": "All parking spaces are occupied!",
     "stashesTarget": "Open Stash - [%s]",
     "cleanTarget": "Clean Vehicle",
     "cleanProgress": "Cleaning vehicle...",

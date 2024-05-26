@@ -97,19 +97,27 @@ wx.Jobs = {
                 public = true                                  -- false - Stash content is individual
             }
         },
-        garages = {                                                              -- Garage options
+        garages = {                                                         -- Garage options
             {
-                location = vector4(451.5510, -1019.1321, 27.4515, 90.9102),      -- Location of the garage
-                spawnLocation = vector4(439.7650, -1019.4845, 27.7254, 87.2493), -- Spawn location for the vehicles
-                spawnInside = true,                                              -- Enable warping ped into the vehicle on select
-                type = "textui",                                                 -- [ target / textui ]
-                npc = `csb_trafficwarden`,                                       -- NPC for the target
-                vehicles = {                                                     -- Vehicle list
+                location = vector4(451.5510, -1019.1321, 27.4515, 90.9102), -- Location of the garage
+                spawnLocations = {                                          -- Spawn location for the vehicles, if multiple are defined, the first free location will be selected
+                    vector4(445.9415, -1025.0244, 28.6464, 356.1793),
+                    vector4(438.4260, -1026.9872, 28.7916, 6.1582),
+                    vector4(434.5964, -1026.4027, 28.8572, 3.8100),
+                    vector4(431.2489, -1026.8451, 28.9187, 24.2232),
+                    vector4(427.8488, -1027.7943, 28.9801, 0.7660),
+                    vector4(436.7216, -1007.7450, 27.7102, 180.3662),
+                },
+                spawnInside = true,               -- Enable warping ped into the vehicle on select
+                type = "target",                  -- [ target / textui ]
+                npc = `csb_trafficwarden`,        -- NPC for the target
+                vehicles = {                      -- Vehicle list
                     {
-                        model = `police`,                                        -- Vehicle model
-                        label = "Police Vehicle",                                -- Vehicle label shown in the context menu
-                        minGrade = 0,                                            -- Minimum grade needed to choose this vehicle
-                        livery = 0                                               -- Livery index
+                        model = `police`,         -- Vehicle model
+                        label = "Police Vehicle", -- Vehicle label shown in the context menu
+                        minGrade = 0,             -- Minimum grade needed to choose this vehicle
+                        livery = 0,               -- Livery index
+                        plate = "LSPD"            -- License plate text, set to false for a random one
                     }
                 }
             }

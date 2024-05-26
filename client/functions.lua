@@ -246,3 +246,18 @@ wx.TableSize = function(t)
     end
     return size
 end
+
+wx.IsSpawnpointClear = function(coords)
+    local veh = lib.getClosestVehicle(coords, 2.5, true)
+    if not veh then return true end
+    return false
+end
+
+wx.GetFreeSpawnpoint = function(coordsArray)
+    for _, coord in pairs(coordsArray) do
+        if wx.IsSpawnpointClear(vec3(coord)) then
+            return coord
+        end
+    end
+    return false
+end
