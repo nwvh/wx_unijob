@@ -27,16 +27,15 @@ end
 ---Custom function for notifications
 ---@param title string Title of the notification
 ---@param message string Message of the notification
----@param type string Type of the notification (success, error, warning, info)
+---@param notifyType string Type of the notification (success, error, warning, info)
 ---@param time number Time in milliseconds for how long the notification should be displayed
-
-wx.Client.Notify = function(title, message, type, icon, time)
+wx.Client.Notify = function(title, message, notifyType, icon, time)
     lib.notify({
-        title = title,
-        type = type,
+        title = title or "Unijob",
+        type = notifyType,
         description = message,
-        icon = icon,
-        time = time
+        icon = icon or "briefcase",
+        time = time or 5000
     })
 end
 
