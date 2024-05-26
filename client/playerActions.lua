@@ -189,8 +189,6 @@ local options = {
             return false
         end,
         onSelect = function(data)
-            local job = wx.GetJob()
-            local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
             HandcuffPlayer(data.entity)
         end
     },
