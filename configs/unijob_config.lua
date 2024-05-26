@@ -1,6 +1,7 @@
 wx = {}
 
-wx.handcuffsItem = "handcuffs"                                     -- Item for the handcuffs
+wx.handcuffsItem = "money"                                         -- Item for the handcuffs
+wx.handcuffsCanBreak = true                                        -- Enables skill check when being handcuffed, when success, player will be able to flee
 
 wx.Crafting = {                                                    -- Crafting options
     {
@@ -53,6 +54,8 @@ wx.Jobs = {
             ['hijack'] = true,                             -- Can hijack (player) vehicles
             ['idcard'] = true,                             -- Can request (player's) ID card
             ['clean'] = true,                              -- Can clean (player) vehicles
+            ['putIn'] = true,                              -- Can put players in vehicles
+            ['putOut'] = true,                             -- Can put players out of vehicles
         },
         bossMenu = {                                       -- Boss Menu options
             enable = true,                                 -- Enable boss menu
