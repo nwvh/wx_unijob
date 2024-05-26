@@ -44,7 +44,7 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 | ✅      | Put in / Take out of vehicle | Done  and Functional                                                                                    |
 | ✅      | Locales                      | Done and Functional                                                                                     |
 | ✅      | Blips                        | Done and Functional                                                                                     |
-| 🔧      | (Discord) logging            | Being worked on                                                                                         |
+| ✅      | (Discord) logging            | Being worked on                                                                                         |
 | ❌      | Shops                        | TODO                                                                                                    |
 | ❌      | Item Collecting Points       | TODO                                                                                                    |
 | ❌      | Sell Points                  | TODO                                                                                                    |

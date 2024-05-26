@@ -8,4 +8,12 @@ wx.Server.Ban = function(playerId, reason)
 end
 
 --- Webhooks for logging
-wx.Server.Webhooks = {}
+wx.Server.Webhooks = {
+    ["crafting"] = "",
+    ["repair"] = "",
+    ["hijack"] = "",
+    ["impound"] = "",
+    ["garages"] = "",
+    ["billing"] = "",
+    ["cuff"] = ""
+}

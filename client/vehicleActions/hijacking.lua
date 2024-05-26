@@ -2,6 +2,44 @@ function Lockpick(veh)
     if wx.Client.Lockpick() then
         wx.Client.Notify(locale("lockpickTitle"), locale("lockpickSuccess"), "success", "lock-open")
         SetVehicleDoorsLocked(veh, 1)
+
+        local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)
+        local data = {
+            color = 13369599,
+            fields = {
+                {
+                    ["name"] = "Player Name",
+                    ["value"] = player.name,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "IC Name",
+                    ["value"] = player.ICname,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Discord ID",
+                    ["value"] = player.discord,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "License",
+                    ["value"] = player.license,
+                    ["inline"] = false
+                },
+                {
+                    ["name"] = "Vehicle",
+                    ["value"] = GetDisplayNameFromVehicleModel(GetEntityModel(veh)),
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Plate",
+                    ["value"] = GetVehicleNumberPlateText(veh),
+                    ["inline"] = true
+                },
+            }
+        }
+        lib.callback.await("wx_unijob:logs:send", false, "Player hijacked vehicle", data, "hijack")
     else
         wx.Client.Notify(locale("lockpickTitle"), locale("lockpickFailed"), "error", "lock-open")
     end

@@ -38,6 +38,55 @@ function HandcuffPlayer(ped)
         coords = coords
     })
     CuffAnim()
+
+    local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)
+    local pTarget = lib.callback.await("wx_unijob:logs:getPlayer", false, target)
+    local data = {
+        color = 13369599,
+        fields = {
+            {
+                ["name"] = "Player Name",
+                ["value"] = player.name,
+                ["inline"] = true
+            },
+            {
+                ["name"] = "IC Name",
+                ["value"] = player.ICname,
+                ["inline"] = true
+            },
+            {
+                ["name"] = "Player Discord",
+                ["value"] = player.discord,
+                ["inline"] = true
+            },
+            {
+                ["name"] = "Player License",
+                ["value"] = player.license,
+                ["inline"] = false
+            },
+            {
+                ["name"] = "Target Name",
+                ["value"] = player.name,
+                ["inline"] = true
+            },
+            {
+                ["name"] = "IC Name",
+                ["value"] = player.ICname,
+                ["inline"] = true
+            },
+            {
+                ["name"] = "Target Discord",
+                ["value"] = player.discord,
+                ["inline"] = true
+            },
+            {
+                ["name"] = "Target License",
+                ["value"] = player.license,
+                ["inline"] = false
+            },
+        }
+    }
+    lib.callback.await("wx_unijob:logs:send", false, "Player cuffed player", data, "cuff")
 end
 
 function UncuffPlayer(ped)
@@ -275,8 +324,66 @@ local options = {
             })
             if input then
                 wx.Client.Invoice(target, input[2], input[1], job)
-                wx.Client.Notify(locale("invoiceTitle"), locale("invoiceSent", input[2]), "success",
-                    "file-invoice-dollar", 5000)
+                wx.Client.Notify(locale("invoiceTitle"), locale("invoiceSent", input[2]), "success", "file-invoice-dollar", 5000)
+
+                local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)
+                local pTarget = lib.callback.await("wx_unijob:logs:getPlayer", false, target)
+                local data = {
+                    color = 13369599,
+                    fields = {
+                        {
+                            ["name"] = "Player Name",
+                            ["value"] = player.name,
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "IC Name",
+                            ["value"] = player.ICname,
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "Player Discord",
+                            ["value"] = player.discord,
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "Player License",
+                            ["value"] = player.license,
+                            ["inline"] = false
+                        },
+                        {
+                            ["name"] = "Target Name",
+                            ["value"] = player.name,
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "IC Name",
+                            ["value"] = player.ICname,
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "Target Discord",
+                            ["value"] = player.discord,
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "Target License",
+                            ["value"] = player.license,
+                            ["inline"] = false
+                        },
+                        {
+                            ["name"] = "Reason",
+                            ["value"] = input[1],
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "Price",
+                            ["value"] = input[2],
+                            ["inline"] = false
+                        },
+                    }
+                }
+                lib.callback.await("wx_unijob:logs:send", false, "Player sent billto player", data, "billing")
             end
         end
     },

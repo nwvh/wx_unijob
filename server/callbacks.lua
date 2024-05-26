@@ -153,3 +153,33 @@ lib.callback.register(
         TriggerClientEvent("wx_unijob:vehicles:getOut", target)
     end
 )
+lib.callback.register("wx_unijob:vehicles:putOut", function(_, target)
+    TriggerClientEvent('wx_unijob:vehicles:getOut', target)
+end)
+
+-- [ GET DISCORD ]
+lib.callback.register("wx_unijob:logs:getPlayer", function(_, source)
+    local xP = exports.wx_bridge:GetPlayer(source)
+    local player = {
+        discord = "",
+        id = "",
+        ICname = xP.getName(),
+        name = GetPlayerName(source),
+        license = xP.getIdentifier()
+    }
+
+
+        
+    identifiers = GetNumPlayerIdentifiers(source)
+    for i = 0, identifiers + 1 do
+        if GetPlayerIdentifier(source, i) ~= nil then
+            if string.match(GetPlayerIdentifier(source, i), "discord") then
+                player.discord = GetPlayerIdentifier(source, i)
+                player.id = string.sub(player.discord, 9, -1)
+                player.discord = "<@"..player.id..">"
+            end
+        end
+    end
+    
+    return player 
+end)
