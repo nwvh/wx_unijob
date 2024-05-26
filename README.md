@@ -6,6 +6,20 @@
 
 WX UniJob is an advanced system for creating and managing all your jobs with a single resource.
 
+# Screenshots
+![unijob-screenshot](./.assets/image-1.png)
+![unijob-screenshot](./.assets/image-2.png)
+![unijob-screenshot](./.assets/image-3.png)
+![unijob-screenshot](./.assets/image-4.png)
+![unijob-screenshot](./.assets/image-5.png)
+![unijob-screenshot](./.assets/image-6.png)
+![unijob-screenshot](./.assets/image-7.png)
+![unijob-screenshot](./.assets/image-8.png)
+![unijob-screenshot](./.assets/image-9.png)
+
+# Config File
+![unijob-config](./.assets/configfile.png)
+
 # TODO
 
 | Status | Function                     | Description                                                                                             |
@@ -29,3 +43,8 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 | ✅      | ID Card Request              | Done  and Functional                                                                                    |
 | ✅      | Put in / Take out of vehicle | Done  and Functional                                                                                    |
 | ✅      | Locales                      | Done and Functional                                                                                     |
+| ✅      | Blips                        | Done and Functional                                                                                     |
+| 🔧      | (Discord) logging            | Being worked on                                                                                         |
+| ❌      | Shops                        | TODO                                                                                                    |
+| ❌      | Item Collecting Points       | TODO                                                                                                    |
+| ❌      | Sell Points                  | TODO                                                                                                    |
