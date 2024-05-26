@@ -21,6 +21,7 @@
     "lockpickSuccess": "You have unlocked the vehicle!",
     "lockpickFailed": "You have failed to unlock the vehicle",
     "impoundTitle": "Impound",
+    "impoundProgress": "Impounding vehicle...",
     "impoundTarget": "Impound Vehicle",
     "impoundTooFar": "The vehicle you're trying to impound is too far!",
     "impoundOccupied": "The vehicle you're trying to impound is occupied!",

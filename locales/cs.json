@@ -21,6 +21,7 @@
     "lockpickSuccess": "Vypáčil jsi zámek vozidla",
     "lockpickFailed": "Nepodařilo se ti vypáčit zámek vozidla",
     "impoundTitle": "Odtahovka",
+    "impoundProgress": "Odtahuješ vozidlo...",
     "impoundTarget": "Odtáhnout Vozidlo",
     "impoundTooFar": "Vozidlo které se snažíš odtáhnout je moc daleko!",
     "impoundOccupied": "Vozidlo které se snažíš odtáhnout musí být prázdné!",

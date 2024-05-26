@@ -21,7 +21,7 @@ function Impound(entity)
     end
 
     local prop = SpawnProp("prop_pencil_01", 58866, 0.11, -0.02, 0.001, -100.0, 0.0, 0.0)
-    if wx.ProgressBar(nil, 5000, "Impounding vehicle", true, true, { dict = "missheistdockssetup1clipboard@base", clip = "base" }, {
+    if wx.ProgressBar(nil, 5000, locale("impoundTarget"), true, true, { dict = "missheistdockssetup1clipboard@base", clip = "base" }, {
             model = `prop_notepad_01`,
             bone = 18905,
             pos = {
