@@ -3,7 +3,7 @@ function Lockpick(veh)
         wx.Client.Notify(locale("lockpickTitle"), locale("lockpickSuccess"), "success", "lock-open")
         SetVehicleDoorsLocked(veh, 1)
 
-        local player = lib.callback.await("wx_unijob:logs:getPlayer", false)
+        local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)
         local data = {
             color = 13369599,
             fields = {

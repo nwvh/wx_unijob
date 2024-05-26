@@ -10,8 +10,10 @@ end
 --- Webhooks for logging
 wx.Server.Webhooks = {
     ["crafting"] = "",
-    ["repair"] = "https://discord.com/api/webhooks/1244303901059186730/3RL0Tf-9zkAailr-fjGlX2FA7Xr3dtPDxAlUPOeVkx1fyJ1fUqKvKzeexMjcenB_rGdm",
+    ["repair"] = "",
     ["hijack"] = "",
     ["impound"] = "",
-    ["garages"] = ""
+    ["garages"] = "",
+    ["billing"] = "",
+    ["cuff"] = ""
 }

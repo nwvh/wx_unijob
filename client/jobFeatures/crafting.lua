@@ -66,7 +66,7 @@ CreateThread(function()
                                         end
                                         lib.callback.await("wx_unijob:crafting:craftItem", false, item, count)
 
-                                        local player = lib.callback.await("wx_unijob:logs:getPlayer", false)
+                                        local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)
                                         local data = {
                                             color = 13369599,
                                             fields = {

@@ -44,7 +44,7 @@ function Impound(entity)
         DeleteEntity(prop)
         lib.callback.await("wx_unijob:impound:requestImpound", false, (VehToNet(entity)))
 
-        local player = lib.callback.await("wx_unijob:logs:getPlayer", false)
+        local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)
         local data = {
             color = 13369599,
             fields = {

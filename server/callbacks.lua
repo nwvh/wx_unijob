@@ -158,7 +158,7 @@ lib.callback.register("wx_unijob:vehicles:putOut", function(_, target)
 end)
 
 -- [ GET DISCORD ]
-lib.callback.register("wx_unijob:logs:getPlayer", function(source)
+lib.callback.register("wx_unijob:logs:getPlayer", function(_, source)
     local xP = exports.wx_bridge:GetPlayer(source)
     local player = {
         discord = "",

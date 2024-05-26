@@ -24,7 +24,7 @@ function fixCar(veh)
         lib.callback.await("wx_unijob:crafting:removeItem", false, wx.Client.repairItem, 1)
     end
 
-    local player = lib.callback.await("wx_unijob:logs:getPlayer", false)
+    local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)
     local data = {
         color = 13369599,
         fields = {
