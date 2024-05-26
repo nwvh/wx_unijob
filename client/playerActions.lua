@@ -478,7 +478,7 @@ local options = {
             if wx.ProgressBar(nil, 15000, locale("reviveProgress"), true, true, { dict = "mini@cpr@char_a@cpr_str", clip = "cpr_pumpchest" }) then
                 ClearPedTasks(cache.ped)
                 lib.callback.await("wx_unijob:revive:requestRevive", false, target)
-                lib.callback.await("wx_unijob:crafting:removeItem", false, wx.Items["revive"].item)
+                lib.callback.await("wx_unijob:crafting:removeItem", false, wx.Items["revive"].item, 1)
                 return wx.Client.Notify(locale("reviveTitle"), locale("reviveSuccess"), "success", "kit-medical")
             else
                 ClearPedTasks(cache.ped)
@@ -494,7 +494,7 @@ local options = {
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
             for k, v in pairs(wx.Jobs) do
-                if v.canAccess['revive'] and k == j and GetEntityHealth(entity) < GetEntityMaxHealth(entity) * 0.9 then
+                if v.canAccess['revive'] and k == j and (GetEntityHealth(entity) < GetEntityMaxHealth(entity) * 0.9) and not IsEntityDead(entity) then
                     return true
                 end
             end
