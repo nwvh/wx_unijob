@@ -15,19 +15,19 @@ function fixCar(veh)
     end
 
     if lib.progressBar({
-        duration = 5000,
-        label = 'Repairing vehicle',
-        useWhileDead = false,
-        canCancel = true,
-        disable = {
-            move = true,
-            car = true,
-        },
-        anim = {
-            dict = 'mini@repair',
-            clip = 'fixing_a_ped'
-        },
-    }) then 
+            duration = 5000,
+            label = 'Repairing vehicle',
+            useWhileDead = false,
+            canCancel = true,
+            disable = {
+                move = true,
+                car = true,
+            },
+            anim = {
+                dict = 'mini@repair',
+                clip = 'fixing_a_ped'
+            },
+        }) then
         wx.Client.Notify("Mechanic", "Vehicle was repaired", "success", 5000)
         SetVehicleFixed(veh)
         SetVehicleDeformationFixed(veh)
@@ -37,7 +37,6 @@ function fixCar(veh)
     end
 end
 
-
 local options = {
     {
         name = 'wx_unijob:repair:target',
@@ -45,10 +44,11 @@ local options = {
         distance = 2.0,
         label = "Repair vehicle",
         canInteract = function(entity, distance, coords, name, bone)
-            local job = exports.wx_bridge:GetJob()
-            if not wx.Jobs[tostring(job)] then return false end
-            if wx.Jobs[tostring(job)].canAccess['repair'] and IsVehicleDamaged(entity) then
-                return true
+            local j = wx.GetJob()
+            for k, v in pairs(wx.Jobs) do
+                if v.canAccess['impound'] and k == j and IsVehicleDamaged(entity) then
+                    return true
+                end
             end
             return false
         end,
