@@ -1,11 +1,11 @@
 wx = {}
 
-wx.handcuffsItem = "handcuffs"
+wx.handcuffsItem = "handcuffs"                                     -- Item for the handcuffs
 
-wx.Crafting = {
+wx.Crafting = {                                                    -- Crafting options
     {
-        location = vector4(639.1279, 254.6801, 102.1521, 64.8326),
-        allowedJobs = { -- Leave empty to disable
+        location = vector4(639.1279, 254.6801, 102.1521, 64.8326), -- Crafting bench location
+        allowedJobs = {                                            -- Leave empty to disable
             ["police"] = true
         },
         items = {
@@ -31,34 +31,44 @@ wx.Crafting = {
 }
 
 wx.Jobs = {
-    ["police"] = {
-        label = "Los Santos Police Department",
+    ["police"] = {                                             -- Job name
+        label = "Los Santos Police Department",                -- Label of the job
+        blips = {                                              -- Blip Settings
+            {
+                location = vec3(450.8468, -987.8705, 43.6915), -- Location of the blip
+                label = "LSPD Station",                        -- Label of the blip
+                showForEveryone = true,                        -- [false = Only players with the job can see the blip]
+                sprite = 60,                                   -- Blip "icon"
+                color = 3,                                     -- Blip color
+                size = 0.8                                     -- Blip Size
+            }
+        },
         canAccess = {
-            ['handcuff'] = true, -- Can handcuff other players
-            ['drag'] = true,     -- Can escort (drag) other players
-            ['vehicles'] = true, -- Can remove/put other players from/in vehicles
-            ['impound'] = true,  -- Can impound player's vehicles
-            ['invoice'] = true,  -- Can bill other players (you will need to configure your invoice system)
-            ['repair'] = true,   -- Can repair (player) vehicles
-            ['hijack'] = true,   -- Can hijack (player) vehicles
-            ['idcard'] = true,   -- Can request (player's) ID card
-            ['clean'] = true,    -- Can clean (player) vehicles
-
+            ['handcuff'] = true,                           -- Can handcuff other players
+            ['drag'] = true,                               -- Can escort (drag) other players
+            ['vehicles'] = true,                           -- Can remove/put other players from/in vehicles
+            ['impound'] = true,                            -- Can impound player's vehicles
+            ['invoice'] = true,                            -- Can bill other players (you will need to configure your invoice system)
+            ['repair'] = true,                             -- Can repair (player) vehicles
+            ['hijack'] = true,                             -- Can hijack (player) vehicles
+            ['idcard'] = true,                             -- Can request (player's) ID card
+            ['clean'] = true,                              -- Can clean (player) vehicles
         },
-        bossMenu = {
-            enable = true,
-            marker = true,
-            location = vec3(442.5081, -975.0042, 30.6896),
-            minGrade = 4
+        bossMenu = {                                       -- Boss Menu options
+            enable = true,                                 -- Enable boss menu
+            marker = true,                                 -- Show marker when nearby
+            location = vec3(442.5081, -975.0042, 30.6896), -- Location of the boss menu
+            minGrade = 4                                   -- Minimum grade to interact with the boss menu
         },
-        cloakroom = {
-            enable = true,
-            marker = true,
-            locations = {
+        cloakroom = {                                      -- Cloakroom settings
+            enable = true,                                 -- Enable cloakrooms
+            marker = true,                                 -- Show marker when nearby
+            locations = {                                  -- Locations of the cloakrooms
                 vec3(452.0984, -976.4167, 30.6896)
             }
         },
-        grades = {
+        grades = { -- Grades for the job
+            -- Format: { id = "gradeId", label = "Grade Label", salary = salaryInDollars }
             { id = 'cadet',           label = 'Cadet',           salary = 500, },
             { id = 'officer1',        label = 'Officer I',       salary = 900, },
             { id = 'officer2',        label = 'Officer II',      salary = 1000, },
@@ -73,29 +83,29 @@ wx.Jobs = {
             { id = 'chief_assistant', label = 'Assistant chief', salary = 3700, },
             { id = 'boss',            label = 'Chief of police', salary = 4000, }
         },
-        stashes = {
+        stashes = {                                            -- Stashes
             {
-                label = "Evidence",
-                location = vec3(461.8699, -979.0797, 30.6896),
-                slots = 100,
-                maxWeight = 100,
-                minGrade = 4,
-                public = true
+                label = "Evidence",                            -- Stash label
+                location = vec3(461.8699, -979.0797, 30.6896), -- Stash location
+                slots = 100,                                   -- Stash slots
+                maxWeight = 100,                               -- Stash weight
+                minGrade = 4,                                  -- Minimum grade needed to open the stash
+                public = true                                  -- false - Stash content is individual
             }
         },
-        garages = {
+        garages = {                                                              -- Garage options
             {
-                location = vector4(451.5510, -1019.1321, 27.4515, 90.9102),
-                spawnLocation = vector4(439.7650, -1019.4845, 27.7254, 87.2493),
-                spawnInside = true,
-                type = "textui",           -- [ target / textui ]
-                npc = `csb_trafficwarden`, -- NPC for the target
-                vehicles = {
+                location = vector4(451.5510, -1019.1321, 27.4515, 90.9102),      -- Location of the garage
+                spawnLocation = vector4(439.7650, -1019.4845, 27.7254, 87.2493), -- Spawn location for the vehicles
+                spawnInside = true,                                              -- Enable warping ped into the vehicle on select
+                type = "textui",                                                 -- [ target / textui ]
+                npc = `csb_trafficwarden`,                                       -- NPC for the target
+                vehicles = {                                                     -- Vehicle list
                     {
-                        model = `police`,
-                        label = "Police Vehicle",
-                        minGrade = 0,
-                        livery = 0
+                        model = `police`,                                        -- Vehicle model
+                        label = "Police Vehicle",                                -- Vehicle label shown in the context menu
+                        minGrade = 0,                                            -- Minimum grade needed to choose this vehicle
+                        livery = 0                                               -- Livery index
                     }
                 }
             }
