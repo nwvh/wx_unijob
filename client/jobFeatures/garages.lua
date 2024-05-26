@@ -94,6 +94,7 @@ CreateThread(
                                         reactions = false
                                     }
                                 )
+                            TaskStartScenarioInPlace(ped, data.npcScenario, -1, true)
                             exports.ox_target.addLocalEntity(
                                 _ENV,
                                 (ped),
