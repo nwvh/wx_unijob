@@ -5,6 +5,7 @@ CreateThread(function()
                 coords = data.location,
                 radius = 2.0,
                 drawSprite = true,
+
                 options = {
                     {
                         label = ("Open Stash - [%s]"):format(data.label),

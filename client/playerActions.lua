@@ -129,6 +129,7 @@ local options = {
         name = 'wx_unijob:invoice:target',
         icon = "fas fa-file-invoice-dollar",
         label = "Invoice",
+        distance = 2.0,
         canInteract = function(entity, distance, coords, name, bone)
             local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
@@ -157,6 +158,7 @@ local options = {
         name = 'wx_unijob:id:target',
         icon = "fas fa-id-card",
         label = "ID Card",
+        distance = 2.0,
         canInteract = function(entity, distance, coords, name, bone)
             local j = wx.GetJob()
             for k, v in pairs(wx.Jobs) do

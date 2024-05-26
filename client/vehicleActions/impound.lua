@@ -52,6 +52,7 @@ CreateThread(function()
             name = 'wx_unijob:impound:target',
             icon = "fas fa-car-burst",
             label = "Impound",
+            distance = 2.0,
             canInteract = function(entity, distance, coords, name, bone)
                 local j = wx.GetJob()
                 for k, v in pairs(wx.Jobs) do

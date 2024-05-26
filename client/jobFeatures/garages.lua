@@ -10,6 +10,7 @@ function OpenGarages(v, data, job)
             disabled = (wx.GetGrade() < car.minGrade),
             onSelect = function()
                 local veh = wx.SpawnVehicle(car.model, data.spawnLocation)
+                SetVehicleLivery(veh, car.livery)
                 lastSpawnedVehicle = veh
                 if data.spawnInside then
                     for i = 0, 200 do
@@ -58,6 +59,7 @@ CreateThread(function()
                         label = "Open Garage",
                         name = "wx_unijob:garage:choose",
                         icon = "fa-solid fa-warehouse",
+                        distance = 2.0,
                         canInteract = function(entity, distance, coords, name, bone)
                             local j = wx.GetJob()
                             if job == j then
@@ -72,6 +74,7 @@ CreateThread(function()
                         label = "Return Vehicle",
                         name = "wx_unijob:garage:return",
                         icon = "fa-solid fa-car-side",
+                        distance = 2.0,
                         canInteract = function(entity, distance, coords, name, bone)
                             local j = wx.GetJob()
                             if job == j and lastSpawnedVehicle ~= 0 then
