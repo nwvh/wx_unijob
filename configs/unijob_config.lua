@@ -41,6 +41,8 @@ wx.Jobs = {
             ['invoice'] = true,  -- Can bill other players (you will need to configure your invoice system)
             ['repair'] = true,   -- Can repair (player) vehicles
             ['hijack'] = true,   -- Can hijack (player) vehicles
+            ['idcard'] = true,   -- Can request (player's) ID card
+
         },
         bossMenu = {
             enable = true,
@@ -84,7 +86,7 @@ wx.Jobs = {
                 spawnLocation = vector4(439.7650, -1019.4845, 27.7254, 87.2493),
                 spawnInside = true,
                 type = "textui",           -- [ target / textui ]
-                npc = `s_m_y_dockwork_01`, -- NPC for the target
+                npc = `csb_trafficwarden`, -- NPC for the target
                 vehicles = {
                     {
                         model = `police`,
@@ -106,14 +108,17 @@ wx.Jobs = {
             ['invoice'] = true,  -- Can bill other players (you will need to configure your invoice system)
             ['repair'] = true,   -- Can repair (player) vehicles
             ['hijack'] = true,   -- Can hijack (player) vehicles
+            ['idcard'] = true,   -- Can request (player's) ID card
         },
         bossMenu = {
             enable = true,
+            marker = true,
             location = vec3(442.5081, -975.0042, 30.6896),
-            minGrade = 4
+            minGrade = 4,
         },
         cloakroom = {
             enable = true,
+            marker = true,
             locations = {
                 vec3(452.0984, -976.4167, 30.6896)
             }
@@ -145,7 +150,7 @@ wx.Jobs = {
                 spawnLocation = vector4(439.7650, -1019.4845, 27.7254, 87.2493),
                 spawnInside = true,
                 type = "textui",           -- [ target / textui ]
-                npc = `s_m_y_dockwork_01`, -- NPC for the target
+                npc = `csb_trafficwarden`, -- NPC for the target
                 vehicles = {
                     {
                         model = `police`,
