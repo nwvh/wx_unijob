@@ -28,7 +28,16 @@ local options = {
             return false
         end,
         onSelect = function(data)
-            lockpick(data.entity)
+            if wx.Client.needLockpick then
+                local count = exports.ox_inventory:GetItemCount(wx.Client.lockpickItems)
+                if count > 0 then
+                    lockpick(data.entity)
+                else
+                    wx.Client.Notify("Lockpick", "You need lockpick for this!", "error", "lock-open")
+                end
+            else
+                lockpick(data.entity)
+            end
         end
     }
 }
