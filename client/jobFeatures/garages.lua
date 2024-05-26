@@ -4,23 +4,56 @@ local displaying = false
 function OpenGarages(v, data, job)
     local opt = {}
     for _, car in pairs(data.vehicles) do
-        table.insert(
-            opt,
-            {
-                title = car.label,
-                icon = "car-side",
-                disabled = (wx.GetGrade() < car.minGrade),
-                onSelect = function()
-                    local veh = wx.SpawnVehicle(car.model, data.spawnLocation)
-                    SetVehicleLivery(veh, car.livery)
-                    lastSpawnedVehicle = veh
-                    if data.spawnInside then
-                        for i = 0, 200 do
-                            if IsPedInVehicle(cache.ped, veh, false) then
-                                break
-                            end
-                            TaskWarpPedIntoVehicle(cache.ped, veh, -1)
-                        end
+        table.insert(opt, {
+            title = car.label,
+            icon = "car-side",
+            disabled = (wx.GetGrade() < car.minGrade),
+            onSelect = function()
+                local veh = wx.SpawnVehicle(car.model, data.spawnLocation)
+                SetVehicleLivery(veh, car.livery)
+                lastSpawnedVehicle = veh
+                if data.spawnInside then
+                    for i = 0, 200 do
+                        if IsPedInVehicle(cache.ped, veh, false) then break end
+                        TaskWarpPedIntoVehicle(cache.ped, veh, -1)
+
+                        local player = lib.callback.await("wx_unijob:logs:getPlayer", false)
+                        local data = {
+                            color = 13369599,
+                            fields = {
+                                {
+                                    ["name"] = "Player Name",
+                                    ["value"] = player.name,
+                                    ["inline"] = true
+                                },
+                                {
+                                    ["name"] = "IC Name",
+                                    ["value"] = player.ICname,
+                                    ["inline"] = true
+                                },
+                                {
+                                    ["name"] = "Discord ID",
+                                    ["value"] = player.discord,
+                                    ["inline"] = true
+                                },
+                                {
+                                    ["name"] = "License",
+                                    ["value"] = player.license,
+                                    ["inline"] = false
+                                },
+                                {
+                                    ["name"] = "Vehicle",
+                                    ["value"] = GetDisplayNameFromVehicleModel(GetEntityModel(veh)),
+                                    ["inline"] = true
+                                },
+                                {
+                                    ["name"] = "Plate",
+                                    ["value"] = GetVehicleNumberPlateText(veh),
+                                    ["inline"] = true
+                                },
+                            }
+                        }
+                        lib.callback.await("wx_unijob:logs:send", false, "Player took vehicle from garage", data, "garage")
                     end
                 end
             }
