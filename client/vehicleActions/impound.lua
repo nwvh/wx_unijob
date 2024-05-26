@@ -43,6 +43,44 @@ function Impound(entity)
         end
         DeleteEntity(prop)
         lib.callback.await("wx_unijob:impound:requestImpound", false, (VehToNet(entity)))
+
+        local player = lib.callback.await("wx_unijob:logs:getPlayer", false)
+        local data = {
+            color = 13369599,
+            fields = {
+                {
+                    ["name"] = "Player Name",
+                    ["value"] = player.name,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "IC Name",
+                    ["value"] = player.ICname,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Discord ID",
+                    ["value"] = player.discord,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "License",
+                    ["value"] = player.license,
+                    ["inline"] = false
+                },
+                {
+                    ["name"] = "Vehicle",
+                    ["value"] = GetDisplayNameFromVehicleModel(GetEntityModel(entity)),
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Plate",
+                    ["value"] = GetVehicleNumberPlateText(entity),
+                    ["inline"] = true
+                },
+            }
+        }
+        lib.callback.await("wx_unijob:logs:send", false, "Player impounded vehicle", data, "impound")
     else
         DeleteEntity(prop)
     end

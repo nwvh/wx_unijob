@@ -15,7 +15,7 @@ wx.Crafting = {                                                    -- Crafting o
                 count = 1,
                 craftingTime = 2500,
                 neededItems = {
-                    ["scrapmetal"] = 100,
+                    ["cola"] = 100,
                     ["money"] = 5000
                 }
             },
