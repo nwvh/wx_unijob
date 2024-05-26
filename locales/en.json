@@ -63,5 +63,9 @@
     "idCardRequestAccept": "Show your ID Card",
     "idCardRequestRefuse": "Refuse",
     "putInTarget": "Put In Vehicle",
-    "putOutTarget": "Take out from vehicle"
+    "putOutTarget": "Take out from vehicle",
+    "silentAlarmTarget": "Silent Alarm",
+    "silentAlarmTitle": "Silent Alarm",
+    "silentAlarmDesc": "Are you sure you want to trigger the silent alarm?",
+    "silentAlarmCooldown": "You need to wait before triggering this silent alarm again!"
 }

@@ -63,5 +63,9 @@
     "idCardRequestAccept": "Předložit doklady",
     "idCardRequestRefuse": "Odmítnout",
     "putInTarget": "Dát do vozidla",
-    "putOutTarget": "Vytáhnout z vozidla"
+    "putOutTarget": "Vytáhnout z vozidla",
+    "silentAlarmTarget": "Tichý poplach",
+    "silentAlarmTitle": "Tichý poplach",
+    "silentAlarmDesc": "Opravdu chceš stisknout tlačítko pro tichý poplach?",
+    "silentAlarmCooldown": "Před dalším použitím tohoto tlačítka musíš počkat!"
 }

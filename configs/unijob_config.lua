@@ -113,6 +113,13 @@ wx.Jobs = {
                     }
                 }
             }
+        },
+        silentAlarm = {    -- Silent alarm options
+            enable = true, -- Enable silent alarm funtion?
+            locations = {  -- Locations of the silent alarm target
+                vector3(441.1358, -979.8524, 30.6896),
+                vector3(447.9791, -974.3834, 30.6896)
+            }
         }
     }
 }
