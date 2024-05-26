@@ -147,9 +147,69 @@ local options = {
             })
             if input then
                 wx.Client.Invoice(target, input[2], input[1], job)
+                wx.Client.Notify("Invoice", "You have sent an invoice for $" .. input[2], "success",
+                    "file-invoice-dollar", 5000)
             end
         end
+    },
+    {
 
+        name = 'wx_unijob:id:target',
+        icon = "fas fa-id-card",
+        label = "ID Card",
+        canInteract = function(entity, distance, coords, name, bone)
+            local j = wx.GetJob()
+            for k, v in pairs(wx.Jobs) do
+                if v.canAccess['idcard'] and k == j then
+                    return true
+                end
+            end
+            return false
+        end,
+        onSelect = function(data)
+            local job = wx.GetJob()
+            local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
+            wx.Client.Notify("ID Card", "You have requested the ID Card from this person", "info", "id-card", 5000)
+            local result = lib.callback.await("wx_unijob:idcard:request", false, target)
+            if type(result) == "table" then
+                lib.registerContext({
+                    id = 'wx_unijob:idcard:result',
+                    title = "ID Card",
+                    options = {
+                        {
+                            title = "First Name",
+                            icon = "user",
+                            description = result.firstName
+                        },
+                        {
+                            title = "Last Name",
+                            icon = "user",
+                            description = result.lastName
+                        },
+                        {
+                            title = "Date of Birth",
+                            icon = "calendar-days",
+                            description = result.dob
+                        },
+                        {
+                            title = "Sex",
+                            icon = result.sex == "Female" and "venus" or "mars",
+                            description = result.sex
+                        },
+                        {
+                            title = "Height",
+                            icon = "ruler-vertical",
+                            description = ("%s cm"):format(result.height)
+                        },
+                    }
+                })
+
+                lib.showContext('wx_unijob:idcard:result')
+                wx.Client.Notify("ID Card", "The person has shown you their ID Card", "success", "id-card", 5000)
+            else
+                wx.Client.Notify("ID Card", "The person rejected your ID Card request", "error", "id-card", 5000)
+            end
+        end
     },
 }
 

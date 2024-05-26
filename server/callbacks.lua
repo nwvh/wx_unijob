@@ -84,3 +84,9 @@ lib.callback.register("wx_unijob:stashes:request", function()
         end
     end
 end)
+
+-- [ ID CARD ]
+lib.callback.register("wx_unijob:idcard:request", function(source, target)
+    local response = lib.callback.await("wx_unijob:idcard:request", target)
+    return response
+end)
