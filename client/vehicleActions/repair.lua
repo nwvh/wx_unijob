@@ -2,33 +2,10 @@ function fixCar(veh)
     local vehW = GetEntityHeading(veh)
     local vehC = GetEntityCoords(veh)
     SetVehicleDoorOpen(veh, 4, false, false)
-    local newCoords = GetOffsetFromEntityInWorldCoords(veh, 0.0, 2.5, 0.0)
-    local oldCoords = GetEntityCoords(PlayerPedId())
-    TaskGoStraightToCoord(PlayerPedId(), newCoords.x, newCoords.y, newCoords.z, 1, -1, vehW - 180, oldCoords)
-
-    while true do
-        Wait(0)
-        local dist = #(newCoords.xy - GetEntityCoords(PlayerPedId()).xy)
-        if dist <= 0.5 then
-            break
-        end
-    end
-
-    if lib.progressBar({
-            duration = 5000,
-            label = 'Repairing vehicle',
-            useWhileDead = false,
-            canCancel = true,
-            disable = {
-                move = true,
-                car = true,
-            },
-            anim = {
-                dict = 'mini@repair',
-                clip = 'fixing_a_ped'
-            },
-        }) then
-        wx.Client.Notify("Mechanic", "Vehicle was repaired", "success", 5000)
+    if wx.ProgressBar(nil, 5000, "Repairing vehicle", true, true, { dict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@", clip = "machinic_loop_mechandplayer" }) then
+        SetVehicleDoorShut(veh, 4, false)
+        wx.Client.Notify("Mechanic", "Vehicle was repaired", "success", "wrench", 5000)
+        Wait(500)
         SetVehicleFixed(veh)
         SetVehicleDeformationFixed(veh)
         SetVehicleUndriveable(veh, false)
@@ -40,7 +17,7 @@ end
 local options = {
     {
         name = 'wx_unijob:repair:target',
-        icon = "fas fa-car",
+        icon = "fas fa-wrench",
         distance = 2.0,
         label = "Repair vehicle",
         canInteract = function(entity, distance, coords, name, bone)

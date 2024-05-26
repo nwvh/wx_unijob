@@ -1,9 +1,9 @@
 function lockpick(veh)
     if wx.Client.Lockpick() then
-        wx.Client.Notify("Lockpick", "You have unlocked the vehicle!", "lock-open", "success")
+        wx.Client.Notify("Lockpick", "You have unlocked the vehicle!", "success", "lock-open")
         SetVehicleDoorsLocked(veh, 1)
     else
-        wx.Client.Notify("Lockpick", "You have failed to unlocked the vehicle!", "lock-open", "error")
+        wx.Client.Notify("Lockpick", "You have failed to unlocked the vehicle!", "error", "lock-open")
     end
 end
 
@@ -28,7 +28,7 @@ local options = {
             return false
         end,
         onSelect = function(data)
-            lockpick(data.enitty)
+            lockpick(data.entity)
         end
     }
 }

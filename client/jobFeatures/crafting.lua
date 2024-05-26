@@ -48,8 +48,8 @@ CreateThread(function()
 
                                     for i, c in pairs(b.neededItems) do
                                         if wx.GetItemCount(i) < c then
-                                            return wx.Client.Notify("Crafting", "You are missing some items!", "wrench",
-                                                "error")
+                                            return wx.Client.Notify("Crafting", "You are missing some items!", "error",
+                                                "wrench")
                                         end
                                     end
                                     if wx.ProgressBar(nil, time, ("Crafting %s"):format(wx.GetItemName(item)), false, true, {

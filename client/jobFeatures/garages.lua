@@ -33,15 +33,15 @@ function ReturnVehicle()
     if lastSpawnedVehicle == 0 then return end
     if not DoesEntityExist(lastSpawnedVehicle) then
         lastSpawnedVehicle = 0
-        return wx.Client.Notify("Garages", "The vehicle you're trying to return is unavailable", "warehouse", "error")
+        return wx.Client.Notify("Garages", "The vehicle you're trying to return is unavailable", "error", "warehouse")
     end
     local pedCoords = GetEntityCoords(cache.ped)
     local vehCoords = GetEntityCoords(lastSpawnedVehicle)
     if #(pedCoords - vehCoords) > 20.0 then
-        return wx.Client.Notify("Garages", "The vehicle you're trying to return is too far", "warehouse", "error")
+        return wx.Client.Notify("Garages", "The vehicle you're trying to return is too far", "error", "warehouse")
     end
     lib.callback.await("wx_unijob:impound:requestImpound", false, VehToNet(lastSpawnedVehicle))
-    return wx.Client.Notify("Garages", "Vehicle has been returned", "warehouse", "success")
+    return wx.Client.Notify("Garages", "Vehicle has been returned", "success", "warehouse")
 end
 
 CreateThread(function()

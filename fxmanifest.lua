@@ -12,7 +12,7 @@ description 'FiveM Resource for managing multiple jobs'
 
 client_scripts {
     'configs/unijob_client_editme.lua',
-    'client/*.lua'
+    'client/**.lua'
 }
 
 -- [[ Server-Side Files ]]

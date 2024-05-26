@@ -28,7 +28,7 @@ end
 ---@param title string Title of the notification
 ---@param message string Message of the notification
 ---@param notifyType string Type of the notification (success, error, warning, info)
----@param time number Time in milliseconds for how long the notification should be displayed
+---@param time? number Time in milliseconds for how long the notification should be displayed
 wx.Client.Notify = function(title, message, notifyType, icon, time)
     return lib.notify({
         title = title or "Unijob",

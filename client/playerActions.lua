@@ -22,10 +22,10 @@ function HandcuffPlayer(ped)
     local handcuffed = lib.callback.await('wx_unijob:handcuffs:isCuffed', false, target)
     print(handcuffed)
     if handcuffed then
-        return wx.Client.Notify("Handcuffs", "This person is already handcuffed", "handcuffs", "error")
+        return wx.Client.Notify("Handcuffs", "This person is already handcuffed", "error", "handcuffs")
     end
     if wx.GetItemCount(wx.handcuffsItem) < 1 then
-        return wx.Client.Notify("Handcuffs", "You don't have any handcuffs", "handcuffs", "error")
+        return wx.Client.Notify("Handcuffs", "You don't have any handcuffs", "error", "handcuffs")
     end
     if not IsPedAPlayer(ped) then return end
     local heading = GetEntityHeading(cache.ped)
@@ -46,7 +46,7 @@ function UncuffPlayer(ped)
     local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))
     local handcuffed = lib.callback.await('wx_unijob:handcuffs:isCuffed', false, target)
     if not handcuffed and not IsPedCuffed(ped) then
-        return wx.Client.Notify("Handcuffs", "This person is not handcuffed", "handcuffs", "error")
+        return wx.Client.Notify("Handcuffs", "This person is not handcuffed", "error", "handcuffs")
     end
     if not IsPedAPlayer(ped) then return end
     local heading = GetEntityHeading(cache.ped)
