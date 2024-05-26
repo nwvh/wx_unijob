@@ -56,8 +56,8 @@ function OpenGarages(v, data, job)
                         lib.callback.await("wx_unijob:logs:send", false, "Player took vehicle from garage", data, "garage")
                     end
                 end
-            }
-        )
+            end
+        })
     end
     lib.registerContext(
         {

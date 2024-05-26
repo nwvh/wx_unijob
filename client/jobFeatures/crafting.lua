@@ -126,3 +126,9 @@ CreateThread(function()
         end
     end
 end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+    for k, v in pairs(props) do
+        DeleteEntity(v)
+    end
+end)
