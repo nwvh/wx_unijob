@@ -22,3 +22,10 @@ lib.callback.register(
         return alert == "confirm" and data or false
     end
 )
+
+lib.callback.register("wx_unijob:revive:revivePlayer", function()
+    wx.Client.Revive()
+end)
+lib.callback.register("wx_unijob:heal:healPlayer", function()
+    wx.Client.Heal()
+end)

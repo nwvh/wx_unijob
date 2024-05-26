@@ -24,7 +24,7 @@ function HandcuffPlayer(ped)
     if handcuffed then
         return wx.Client.Notify(locale("handcuffsTitle"), locale("handcuffsAlready"), "error", "handcuffs")
     end
-    if wx.GetItemCount(wx.handcuffsItem) < 1 then
+    if wx.GetItemCount(wx.Items["handcuffs"].item) < wx.Items["handcuffs"].count then
         return wx.Client.Notify(locale("handcuffsTitle"), locale("handcuffsMissing"), "error", "handcuffs")
     end
     if not IsPedAPlayer(ped) then return end
@@ -32,7 +32,7 @@ function HandcuffPlayer(ped)
     local location = GetEntityForwardVector(cache.ped)
     local coords = GetEntityCoords(cache.ped)
     lib.callback.await('wx_unijob:handcuff', false, target, {
-        item = wx.handcuffsItem,
+        item = wx.Items["handcuffs"].item,
         heading = heading,
         loc = location,
         coords = coords
@@ -324,7 +324,8 @@ local options = {
             })
             if input then
                 wx.Client.Invoice(target, input[2], input[1], job)
-                wx.Client.Notify(locale("invoiceTitle"), locale("invoiceSent", input[2]), "success", "file-invoice-dollar", 5000)
+                wx.Client.Notify(locale("invoiceTitle"), locale("invoiceSent", input[2]), "success",
+                    "file-invoice-dollar", 5000)
 
                 local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)
                 local pTarget = lib.callback.await("wx_unijob:logs:getPlayer", false, target)
@@ -450,6 +451,75 @@ local options = {
             end
         end
     },
+    {
+
+        name = 'wx_unijob:revive:target',
+        icon = "fas fa-kit-medical",
+        label = locale("reviveTarget"),
+        distance = 2.0,
+        canInteract = function(entity, distance, coords, name, bone)
+            local j = wx.GetJob()
+            for k, v in pairs(wx.Jobs) do
+                if v.canAccess['revive'] and k == j and IsEntityDead(entity) then
+                    return true
+                end
+            end
+            return false
+        end,
+        onSelect = function(data)
+            if wx.GetItemCount(wx.Items["revive"].item) < wx.Items["revive"].count then
+                return wx.Client.Notify(locale("reviveTitle"),
+                    locale("reviveMissing", wx.Items["revive"].count, wx.Items["revive"].item, 1), "error",
+                    "kit-medical")
+            end
+            local job = wx.GetJob()
+            local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
+            TaskStartScenarioInPlace(cache.ped, "CODE_HUMAN_MEDIC_KNEEL", -1, false)
+            if wx.ProgressBar(nil, 15000, locale("reviveProgress"), true, true, { dict = "mini@cpr@char_a@cpr_str", clip = "cpr_pumpchest" }) then
+                ClearPedTasks(cache.ped)
+                lib.callback.await("wx_unijob:revive:requestRevive", false, target)
+                lib.callback.await("wx_unijob:crafting:removeItem", false, wx.Items["revive"].item)
+                return wx.Client.Notify(locale("reviveTitle"), locale("reviveSuccess"), "success", "kit-medical")
+            else
+                ClearPedTasks(cache.ped)
+            end
+        end
+    },
+    {
+
+        name = 'wx_unijob:heal:target',
+        icon = "fas fa-heart",
+        label = locale("healTarget"),
+        distance = 2.0,
+        canInteract = function(entity, distance, coords, name, bone)
+            local j = wx.GetJob()
+            for k, v in pairs(wx.Jobs) do
+                if v.canAccess['revive'] and k == j and GetEntityHealth(entity) < GetEntityMaxHealth(entity) * 0.9 then
+                    return true
+                end
+            end
+            return false
+        end,
+        onSelect = function(data)
+            if wx.GetItemCount(wx.Items["heal"].item) < wx.Items["heal"].count then
+                return wx.Client.Notify(locale("healTitle"),
+                    locale("healMissing", wx.Items["heal"].count, wx.GetItemName(wx.Items["heal"].item)), "error",
+                    "kit-medical")
+            end
+            local job = wx.GetJob()
+            local target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(data.entity))
+            TaskStartScenarioInPlace(cache.ped, "CODE_HUMAN_MEDIC_TEND_TO_DEAD", -1, true)
+            if wx.ProgressBar(nil, 5000, locale("healProgress"), true, true) then
+                ClearPedTasks(cache.ped)
+                lib.callback.await("wx_unijob:crafting:removeItem", false, wx.Items["heal"].item, 1)
+                lib.callback.await("wx_unijob:heal:requestHeal", false, target)
+                return wx.Client.Notify(locale("healTitle"), locale("healSuccess"), "success", "kit-medical")
+            else
+                ClearPedTasks(cache.ped)
+            end
+        end
+    },
+
 }
 
 CreateThread(function()

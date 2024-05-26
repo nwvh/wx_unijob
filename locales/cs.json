@@ -69,5 +69,15 @@
     "silentAlarmTarget": "Tichý poplach",
     "silentAlarmTitle": "Tichý poplach",
     "silentAlarmDesc": "Opravdu chceš stisknout tlačítko pro tichý poplach?",
-    "silentAlarmCooldown": "Před dalším použitím tohoto tlačítka musíš počkat!"
+    "silentAlarmCooldown": "Před dalším použitím tohoto tlačítka musíš počkat!",
+    "reviveTitle": "Oživení",
+    "reviveTarget": "Oživit Hráče",
+    "reviveMissing": "Chybí ti %sx %s",
+    "reviveSuccess": "Oživil jsi hráče!",
+    "reviveProgress": "Oživuješ hráče...",
+    "healTitle": "Ošetření",
+    "healTarget": "Ošetřit Hráče",
+    "healMissing": "Chybí ti %sx %s",
+    "healSuccess": "Ošetřil jsi zranění hráči!",
+    "healProgress": "Ošetřuješ hráče..."
 }

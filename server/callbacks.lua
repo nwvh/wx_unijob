@@ -157,6 +157,16 @@ lib.callback.register("wx_unijob:vehicles:putOut", function(_, target)
     TriggerClientEvent('wx_unijob:vehicles:getOut', target)
 end)
 
+-- [ REVIVE ]
+lib.callback.register("wx_unijob:revive:requestRevive", function(_, target)
+    lib.callback.await("wx_unijob:revive:revivePlayer", target)
+end)
+
+-- [ HEAL ]
+lib.callback.register("wx_unijob:heal:requestHeal", function(_, target)
+    lib.callback.await("wx_unijob:heal:healPlayer", target)
+end)
+
 -- [ GET DISCORD ]
 lib.callback.register("wx_unijob:logs:getPlayer", function(_, source)
     local xP = exports.wx_bridge:GetPlayer(source)
@@ -169,17 +179,17 @@ lib.callback.register("wx_unijob:logs:getPlayer", function(_, source)
     }
 
 
-        
+
     identifiers = GetNumPlayerIdentifiers(source)
     for i = 0, identifiers + 1 do
         if GetPlayerIdentifier(source, i) ~= nil then
             if string.match(GetPlayerIdentifier(source, i), "discord") then
                 player.discord = GetPlayerIdentifier(source, i)
                 player.id = string.sub(player.discord, 9, -1)
-                player.discord = "<@"..player.id..">"
+                player.discord = "<@" .. player.id .. ">"
             end
         end
     end
-    
-    return player 
+
+    return player
 end)

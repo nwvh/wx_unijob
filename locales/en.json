@@ -69,5 +69,15 @@
     "silentAlarmTarget": "Silent Alarm",
     "silentAlarmTitle": "Silent Alarm",
     "silentAlarmDesc": "Are you sure you want to trigger the silent alarm?",
-    "silentAlarmCooldown": "You need to wait before triggering this silent alarm again!"
+    "silentAlarmCooldown": "You need to wait before triggering this silent alarm again!",
+    "reviveTitle": "Revive",
+    "reviveTarget": "Revive Player",
+    "reviveMissing": "You are missing %sx %s",
+    "reviveSuccess": "You have revived the person!",
+    "reviveProgress": "Reviving player...",
+    "healTitle": "Healing",
+    "healTarget": "Heal Player",
+    "healMissing": "You are missing %sx %s",
+    "healSuccess": "You have healed the person!",
+    "healProgress": "Healing player..."
 }

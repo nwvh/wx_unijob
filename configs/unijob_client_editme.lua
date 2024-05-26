@@ -55,3 +55,14 @@ wx.Client.HandcuffResist = function()
     return lib.skillCheck({ "medium", "medium", "medium" }, { "e" })
     -- return exports['lockpick']:startLockpick()
 end
+
+wx.Client.Revive = function()
+    return TriggerEvent('esx_ambulancejob:revive')
+end
+
+wx.Client.Heal = function()
+    local maxHealth = GetEntityMaxHealth(cache.ped)
+    local health = GetEntityHealth(cache.ped)
+    local amount = math.min(maxHealth, math.floor(health + maxHealth / 8))
+    return SetEntityHealth(cache.ped, amount)
+end

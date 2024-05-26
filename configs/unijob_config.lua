@@ -1,6 +1,11 @@
 wx = {}
 
 wx.handcuffsItem = "money"                                         -- Item for the handcuffs
+wx.Items = {
+    ["handcuffs"] = { item = "handcuffs", count = 1 },             -- Item(s) needed to handcuff players
+    ["revive"] = { item = "medikit", count = 1 },                  -- Item(s) needed to revive players
+    ["heal"] = { item = "bandage", count = 1 },                    -- Item(s) needed to heal players
+}
 wx.handcuffsCanBreak = true                                        -- Enables skill check when being handcuffed, when success, player will be able to flee
 
 wx.Crafting = {                                                    -- Crafting options
@@ -57,6 +62,8 @@ wx.Jobs = {
             ['clean'] = true,                              -- Can clean (player) vehicles
             ['putIn'] = true,                              -- Can put players in vehicles
             ['putOut'] = true,                             -- Can put players out of vehicles
+            ['revive'] = true,                             -- Can revive other players
+            ['heal'] = true,                               -- Can heal other players
         },
         bossMenu = {                                       -- Boss Menu options
             enable = true,                                 -- Enable boss menu
@@ -108,16 +115,17 @@ wx.Jobs = {
                     vector4(427.8488, -1027.7943, 28.9801, 0.7660),
                     vector4(436.7216, -1007.7450, 27.7102, 180.3662),
                 },
-                spawnInside = true,               -- Enable warping ped into the vehicle on select
-                type = "target",                  -- [ target / textui ]
-                npc = `csb_trafficwarden`,        -- NPC for the target
-                vehicles = {                      -- Vehicle list
+                spawnInside = true,                    -- Enable warping ped into the vehicle on select
+                type = "target",                       -- [ target / textui ]
+                npc = `csb_trafficwarden`,             -- NPC for the target
+                npcScenario = "WORLD_HUMAN_CLIPBOARD", -- NPC Scenario (Animation)
+                vehicles = {                           -- Vehicle list
                     {
-                        model = `police`,         -- Vehicle model
-                        label = "Police Vehicle", -- Vehicle label shown in the context menu
-                        minGrade = 0,             -- Minimum grade needed to choose this vehicle
-                        livery = 0,               -- Livery index
-                        plate = "LSPD"            -- License plate text, set to false for a random one
+                        model = `police`,              -- Vehicle model
+                        label = "Police Vehicle",      -- Vehicle label shown in the context menu
+                        minGrade = 0,                  -- Minimum grade needed to choose this vehicle
+                        livery = 0,                    -- Livery index
+                        plate = "LSPD"                 -- License plate text, set to false for a random one
                     }
                 }
             }
