@@ -240,7 +240,7 @@ local options = {
         canInteract = function(entity, distance, coords, name, bone)
             local job = wx.GetJob()
             if not wx.Jobs[tostring(job)] then return false end
-            if wx.Jobs[tostring(job)].canAccess['drag'] and IsPedCuffed(entity) and IsEntityAttached(entity) then
+            if wx.Jobs[tostring(job)].canAccess['drag'] and IsPedCuffed(entity) or isEscorting and IsEntityAttached(entity) then
                 return true
             end
             return false
