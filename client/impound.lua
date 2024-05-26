@@ -15,12 +15,7 @@ end
 function Impound(entity)
     for i = -1, GetVehicleModelNumberOfSeats(GetHashKey(entity)) do
         if not IsVehicleSeatFree(entity, i) then
-            return lib.notify({
-                title = "Impound",
-                icon = "car-side",
-                type = "error",
-                description = "The vehicle you're trying to impound is occupied"
-            })
+            return wx.Client.Notify("Impound", "The vehicle you're trying to impound is occupied", "car-side", "error")
         end
     end
 
@@ -42,12 +37,7 @@ function Impound(entity)
         local entityCoords = GetEntityCoords(entity)
         local playerCoords = GetEntityCoords(cache.ped)
         if #(playerCoords - entityCoords) > 5 then
-            return lib.notify({
-                title = "Impound",
-                icon = "car-side",
-                type = "error",
-                description = "The vehicle you're trying to impound is too far"
-            })
+            return wx.Client.Notify("Impound", "The vehicle you're trying to impound is too far", "car-side", "error")
         end
         DeleteEntity(prop)
         lib.callback.await("wx_unijob:impound:requestImpound", false, (VehToNet(entity)))
@@ -63,8 +53,9 @@ CreateThread(function()
             icon = "fas fa-car-burst",
             label = "Impound",
             canInteract = function(entity, distance, coords, name, bone)
+                local j = wx.GetJob()
                 for k, v in pairs(wx.Jobs) do
-                    if v.canAccess['impound'] then
+                    if v.canAccess['impound'] and k == j then
                         return true
                     end
                 end

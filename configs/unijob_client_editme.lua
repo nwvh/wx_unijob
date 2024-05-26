@@ -30,11 +30,12 @@ end
 ---@param type string Type of the notification (success, error, warning, info)
 ---@param time number Time in milliseconds for how long the notification should be displayed
 
-wx.Client.Notify = function(title, message, type, time)
+wx.Client.Notify = function(title, message, type, icon, time)
     lib.notify({
         title = title,
         type = type,
         description = message,
+        icon = icon,
         time = time
     })
 end
@@ -42,5 +43,7 @@ end
 ---Custom function for lockpick
 
 wx.Client.Lockpick = function()
-    return exports['lockpick']:startLockpick()
+    return lib.skillCheck({ 'easy', 'easy', 'medium', 'medium', 'hard' }, { 'e' })
+
+    -- return exports['lockpick']:startLockpick()
 end
