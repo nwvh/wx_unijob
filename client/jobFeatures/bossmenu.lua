@@ -25,6 +25,12 @@ CreateThread(function()
                 if IsControlJustReleased(0, 38) then
                     wx.OpenBossMenu(self.job)
                 end
+                if v.bossMenu.marker then
+                    DrawMarker(27, v.bossMenu.location.x, v.bossMenu.location.y, v.bossMenu.location.z - 0.99, 0.0, 0.0,
+                        0.0,
+                        0.0, 180.0, 0.0, .7, .7, .7, 128, 128, 255, 185, false,
+                        true, 2, true, nil, false)
+                end
             end
         end
 

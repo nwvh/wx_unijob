@@ -47,11 +47,13 @@ wx.Jobs = {
         },
         bossMenu = {
             enable = true,
+            marker = true,
             location = vec3(442.5081, -975.0042, 30.6896),
             minGrade = 4
         },
         cloakroom = {
             enable = true,
+            marker = true,
             locations = {
                 vec3(452.0984, -976.4167, 30.6896)
             }
