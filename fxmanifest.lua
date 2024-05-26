@@ -18,6 +18,7 @@ client_scripts {
 -- [[ Server-Side Files ]]
 
 server_scripts {
+    '@oxmysql/lib/MySQL.lua',
     'configs/unijob_server_config.lua',
     'server/*.lua'
 }
