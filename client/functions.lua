@@ -220,6 +220,7 @@ local lastJob = "unemployed"
 CreateThread(function()
     while true do
         Wait(500)
+        while not exports.wx_bridge:IsPlayerLoaded() do Wait(100) end
         local grade = exports.wx_bridge:GetJobGrade()
         local job = exports.wx_bridge:GetJob()
         if grade ~= lastGrade then
