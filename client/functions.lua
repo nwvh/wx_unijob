@@ -194,7 +194,7 @@ function wx.SpawnPed(model, coords, data)
     end
     RequestModel(model)                            -- Request the ped model
     while not HasModelLoaded(model) do Wait(5) end -- Wait for the ped to load
-    local spawnedped = CreatePed(0, model, coords, true, false)
+    local spawnedped = CreatePed(0, model, coords, false, false)
     if data.freeze then
         FreezeEntityPosition(spawnedped, true)
     end
