@@ -50,3 +50,4 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 | ❌      | Shops                        | TODO                                                                                                    |
 | ❌      | Item Collecting Points       | TODO                                                                                                    |
 | ❌      | Sell Points                  | TODO                                                                                                    |
+| ❌      | Duty system                  | TODO                                                                                                    |
