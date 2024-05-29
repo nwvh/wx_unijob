@@ -58,6 +58,7 @@ exports.wx_unijob:openCloakroom()
 | ❌      | Shops                        | TODO                                                                                                    |
 | ❌      | Item Collecting Points       | TODO                                                                                                    |
 | ❌      | Sell Points                  | TODO                                                                                                    |
+| ❌      | Duty system                  | TODO                                                                                                    |
 
 # Credits
 
@@ -72,3 +73,4 @@ exports.wx_unijob:openCloakroom()
 * * Vehicle Repair
 * * Client functions
 * * ... and a lot more!
+=======
