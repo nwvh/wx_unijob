@@ -21,6 +21,14 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 # Config File
 ![unijob-config](./.assets/configfile.png)
 
+# Exports
+```lua
+exports.wx_unijob:isEscorted()
+exports.wx_unijob:isHandcuffed()
+exports.wx_unijob:openBossMenu(job)
+exports.wx_unijob:openCloakroom()
+```
+
 # TODO
 
 | Status | Function                     | Description                                                                                             |
@@ -50,3 +58,17 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 | ❌      | Shops                        | TODO                                                                                                    |
 | ❌      | Item Collecting Points       | TODO                                                                                                    |
 | ❌      | Sell Points                  | TODO                                                                                                    |
+
+# Credits
+
+### The [overextended](https://overextended.dev) team
+* [ox_lib](https://github.com/overextended/ox_lib)
+* [oxmysql](https://github.com/overextended/oxmysql)
+
+### [Hoaxik](https://github.com/hoaxik)
+* Help with a lot of this code
+* * SQL Functions
+* * Vehicle Hijacking
+* * Vehicle Repair
+* * Client functions
+* * ... and a lot more!
