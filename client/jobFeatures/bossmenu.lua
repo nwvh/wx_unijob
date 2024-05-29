@@ -74,3 +74,7 @@ CreateThread(
         end
     end
 )
+
+exports("openBossMenu", function(job)
+    return wx.OpenBossMenu(job)
+end)

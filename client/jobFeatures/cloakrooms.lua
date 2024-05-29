@@ -75,3 +75,7 @@ CreateThread(
         end
     end
 )
+
+exports("openCloakroom", function()
+    return wx.OpenCloakroom()
+end)

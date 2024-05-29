@@ -593,3 +593,12 @@ local vehicleOptions = {
 
 exports.ox_target:addGlobalVehicle(vehicleOptions)
 exports.ox_target.addGlobalPlayer(_ENV, options)
+
+
+exports("isEscorted", function()
+    return isEscorted
+end)
+
+exports("isHandcuffed", function()
+    return cuffed
+end)
