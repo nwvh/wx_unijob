@@ -183,3 +183,30 @@ CreateThread(
         debug(("New grades: %s"):format(newGrades), "info")
     end
 )
+
+-- CreateThread(function()
+--     for job, data in pairs(wx.Jobs) do
+--         if not data.shops.enable then return end
+--         for _, opt in pairs(data.shops.locations) do
+--             exports.ox_inventory:RegisterShop(opt.label:gsub(" ", ""), {
+--                 name = opt.label,
+--                 inventory = opt.items,
+--                 locations = opt.coords,
+--                 groups = {
+--                     [tostring(job)] = opt.minGrade
+--                 },
+--             })
+--         end
+--     end
+-- end)
+exports.ox_inventory:RegisterShop('TestShop', {
+    name = 'Test shop',
+    inventory = {
+        { name = 'burger', price = 10 },
+        { name = 'water',  price = 10 },
+        { name = 'cola',   price = 10 },
+    },
+    locations = {
+        vec3(-1195.1508, -1402.2836, 17.8976),
+    },
+})

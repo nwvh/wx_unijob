@@ -1,5 +1,6 @@
 wx = {}
 
+wx.radialMenus = false                                             -- Enables radial menu support
 wx.handcuffsItem = "money"                                         -- Item for the handcuffs
 wx.Items = {
     ["handcuffs"] = { item = "handcuffs", count = 1 },             -- Item(s) needed to handcuff players
@@ -135,6 +136,22 @@ wx.Jobs = {
             locations = {  -- Locations of the silent alarm target
                 vector3(441.1358, -979.8524, 30.6896),
                 vector3(447.9791, -974.3834, 30.6896)
+            }
+        },
+        shops = { -- Job shops
+            enable = true,
+            marker = true,
+            locations = {
+                {
+                    label = "LSPD Armory",
+                    coords = {
+                        vec3(-1189.4739, -1402.0022, 17.8976)
+                    },
+                    minGrade = 2,
+                    items = {
+                        { name = "WEAPON_PISTOL_MK2", count = 1, license = "weapon", price = 5000, grade = 3 }
+                    }
+                }
             }
         }
     }
