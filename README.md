@@ -59,6 +59,7 @@ exports.wx_unijob:openCloakroom()
 | ❌      | Item Collecting Points       | TODO                                                                                                    |
 | ❌      | Sell Points                  | TODO                                                                                                    |
 | ❌      | Duty system                  | TODO                                                                                                    |
+| ❌      | Radial Menus                 | TODO                                                                                                    |
 
 # Credits
 
