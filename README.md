@@ -63,9 +63,9 @@ exports.wx_unijob:openCloakroom()
 | ✅      | Blips                        | Done and Functional                                                                                     |
 | ✅      | (Discord) logging            | Done and functional                                                                                     |
 | ✅      | Silent Alarm                 | Done and functional                                                                                     |
-| ❌      | Shops                        | TODO                                                                                                    |
-| ❌      | Item Collecting Points       | TODO                                                                                                    |
-| ❌      | Sell Points                  | TODO                                                                                                    |
+| ❓      | Shops                        | Bugging                                                                                                 |
+| ✅      | Item Collecting Points       | Done and Functional                                                                                     |
+| 🔧      | Sell Points                  | Being worked on                                                                                         |
 | ❌      | Duty system                  | TODO                                                                                                    |
 | ❌      | Radial Menus                 | TODO                                                                                                    |
 | ❌      | Job Editing with Command     | Same shit as the warehouse edit                                                                         |

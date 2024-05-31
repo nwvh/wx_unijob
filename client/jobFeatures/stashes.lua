@@ -13,7 +13,7 @@ CreateThread(
                                 icon = "fas fa-box",
                                 distance = 1.0,
                                 canInteract = function(entity, distance, coords, name, bone)
-                                    return wx.GetGrade() >= data.minGrade
+                                    return (wx.GetJob() == job) and wx.GetGrade() >= data.minGrade
                                 end,
                                 onSelect = function()
                                     lib.callback.await("wx_unijob:stashes:request")
