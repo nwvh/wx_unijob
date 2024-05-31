@@ -5,8 +5,15 @@
 # About
 
 WX UniJob is an advanced system for creating and managing all your jobs with a single resource.
+## Dependencies
+* [ox_lib](https://github.com/overextended/ox_lib) - Used for UI, callbacks and more
+* [WX Bridge](https://github.com/nwvh/wx_bridge) - Custom bridge module that adds support for ESX & QB
 
 # Screenshots
+<details>
+<summary>Screenshots</summary>
+<br>
+
 ![unijob-screenshot](./.assets/image-1.png)
 ![unijob-screenshot](./.assets/image-2.png)
 ![unijob-screenshot](./.assets/image-3.png)
@@ -17,6 +24,7 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 ![unijob-screenshot](./.assets/image-8.png)
 ![unijob-screenshot](./.assets/image-9.png)
 ![unijob-screenshot](./.assets/silentalarm.png)
+</details>
 
 # Config File
 ![unijob-config](./.assets/configfile.png)
@@ -60,6 +68,7 @@ exports.wx_unijob:openCloakroom()
 | ❌      | Sell Points                  | TODO                                                                                                    |
 | ❌      | Duty system                  | TODO                                                                                                    |
 | ❌      | Radial Menus                 | TODO                                                                                                    |
+| ❌      | Job Editing with Command     | Same shit as the warehouse edit                                                                         |
 
 # Credits
 
