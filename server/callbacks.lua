@@ -193,3 +193,8 @@ lib.callback.register("wx_unijob:logs:getPlayer", function(_, source)
 
     return player
 end)
+
+-- [ PERMISSIONS ]
+lib.callback.register("wx_unijob:permissions:check", function(source)
+    return exports.wx_bridge:HasPermission(source)
+end)
