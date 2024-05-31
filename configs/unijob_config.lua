@@ -153,6 +153,30 @@ wx.Jobs = {
                     }
                 }
             }
+        },
+        collectingPoints = {
+            enable = true,
+            locations = {
+                {
+                    coords = {
+                        vec3(-1840.076416, 2096.329102, 138.817719),
+                        vec3(-1841.327515, 2095.664551, 139.039200),
+                        vec3(-1842.379272, 2095.104980, 139.279877),
+                        vec3(-1844.365234, 2094.226562, 139.550491)
+                    },
+                    item = "wine",
+                    amount = 1,
+                    collectingTime = 1000
+                },
+                {
+                    coords = {
+                        vec3(-1853.272217, 2100.841064, 138.729874)
+                    },
+                    item = "marijuana",
+                    amount = 1,
+                    collectingTime = 2000
+                }
+            }
         }
     }
 }
