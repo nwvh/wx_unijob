@@ -210,3 +210,25 @@ end)
 lib.callback.register("wx_unijob:permissions:check", function(source)
     return exports.wx_bridge:HasPermission(source)
 end)
+
+-- [ SELLING ]
+lib.callback.register("wx_unijob:sell:sellItem", function(source, item, count)
+    local canSell = true
+    local multiplier = 0
+    for _, v in pairs(wx.Jobs) do
+        if not v.sellPoints.enable then return end
+        for _, data in pairs(v.sellPoints.locations) do
+            for i, c in pairs(data.items) do
+                if item == i then
+                    multiplier = c
+                    canSell = true
+                end
+            end
+        end
+    end
+    if not canSell then
+        return wx.Server.Ban(source, "Attempted to exploit Selling - [Invalid Amount]")
+    end
+    exports.ox_inventory:RemoveItem(source, item, count)
+    return exports.ox_inventory:AddItem(source, "money", count * multiplier)
+end)

@@ -177,6 +177,18 @@ wx.Jobs = {
                     collectingTime = 2000
                 }
             }
+        },
+        sellPoints = {
+            enable = true,
+            locations = {
+                {
+                    coords = vec3(-1899.785767, 2084.900635, 139.392700),
+                    npc = `a_m_m_og_boss_01`,
+                    items = {
+                        ["wine"] = 100
+                    },
+                }
+            }
         }
     }
 }
