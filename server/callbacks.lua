@@ -25,6 +25,18 @@ lib.callback.register(
                 end
             end
         end
+        -- [ Collecting ]
+        for _, v in pairs(wx.Jobs) do
+            for _, b in pairs(v.collectingPoints.locations) do
+                local i = b.item
+                if item == i then
+                    canCraft = true
+                    if b.amount ~= count then
+                        return wx.Server.Ban(source, "Attempted to exploit Crafting - [Invalid Amount]")
+                    end
+                end
+            end
+        end
         if not canCraft then
             return wx.Server.Ban(source, "Attempted to exploit Crafting - [Invalid Item]")
         end
