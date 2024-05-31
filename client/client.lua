@@ -1,6 +1,7 @@
 RegisterCommand('unijob-admin', function()
     local isAllowed = lib.callback.await("wx_unijob:permissions:check", false)
     if not isAllowed then
+        --TODO: Add locales
         wx.Client.Notify(locale("adminMenu"), locale("adminMenuNoPerms"), "error", "bug")
     end
 
