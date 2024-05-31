@@ -65,7 +65,7 @@ exports.wx_unijob:openCloakroom()
 | ✅      | Silent Alarm                 | Done and functional                                                                                     |
 | ❓      | Shops                        | Bugging                                                                                                 |
 | ✅      | Item Collecting Points       | Done and Functional                                                                                     |
-| 🔧      | Sell Points                  | Being worked on                                                                                         |
+| ✅      | Sell Points                  | Done and Functional                                                                                     |
 | ❌      | Duty system                  | TODO                                                                                                    |
 
 # Credits
