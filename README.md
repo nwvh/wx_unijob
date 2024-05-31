@@ -67,11 +67,6 @@ exports.wx_unijob:openCloakroom()
 | ✅      | Item Collecting Points       | Done and Functional                                                                                     |
 | 🔧      | Sell Points                  | Being worked on                                                                                         |
 | ❌      | Duty system                  | TODO                                                                                                    |
-| ❌      | Radial Menus                 | TODO                                                                                                    |
-<<<<<<< HEAD
-| ❌      | Job Editing with Command     | Same shit as the warehouse edit                                                                         |
-=======
->>>>>>> f5e1af1ff88ea5de6a995253685ec6a3f3e1e11a
 
 # Credits
 
