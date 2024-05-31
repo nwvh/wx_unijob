@@ -35,6 +35,7 @@ end
 wx.Client.Notify = function(title, message, notifyType, icon, time)
     return lib.notify(
         {
+            id = ("%s"):format((title:gsub(" ", " ")):lower()),
             title = title or "Unijob",
             type = notifyType,
             description = message,
