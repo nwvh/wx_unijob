@@ -203,10 +203,10 @@ exports.ox_inventory:RegisterShop('TestShop', {
     name = 'Test shop',
     inventory = {
         { name = 'burger', price = 10 },
-        { name = 'water',  price = 10 },
-        { name = 'cola',   price = 10 },
+        { name = 'water', price = 10 },
+        { name = 'cola', price = 10 },
     },
     locations = {
-        vec3(-1195.1508, -1402.2836, 17.8976),
+        vec3(223.832962, -792.619751, 30.695190),
     },
 })

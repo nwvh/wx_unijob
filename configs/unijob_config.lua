@@ -6,8 +6,11 @@ wx.Items = {
     ["handcuffs"] = { item = "handcuffs", count = 1 },             -- Item(s) needed to handcuff players
     ["revive"] = { item = "medikit", count = 1 },                  -- Item(s) needed to revive players
     ["heal"] = { item = "bandage", count = 1 },                    -- Item(s) needed to heal players
+    ["repair"] = { item = "repairkit", count = 1 },   
+    ["lockpick"] = { item = "lockpick", count = 1 },   
 }
 wx.handcuffsCanBreak = true                                        -- Enables skill check when being handcuffed, when success, player will be able to flee
+wx.needLockpick = true                                             -- Does player need lockpick to hijack vehicle
 
 wx.Crafting = {                                                    -- Crafting options
     {
@@ -41,6 +44,7 @@ wx.Jobs = {
     ["police"] = {                                             -- Job name
         label = "Los Santos Police Department",                -- Label of the job
         whitelisted = true,                                    -- Is job whitelisted
+        canSwitchDuty = true,                                  -- Can this job switch between on / off duty
         blips = {                                              -- Blip Settings
             {
                 location = vec3(450.8468, -987.8705, 43.6915), -- Location of the blip

@@ -60,6 +60,10 @@ CreateThread(
                                     false
                                 )
                             end
+
+                            if IsControlJustReleased(0, 38) then
+                                exports.ox_inventory:openInventory('shop', "TestShop")
+                            end
                         end
                     end
 
