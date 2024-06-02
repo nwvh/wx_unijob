@@ -34,6 +34,7 @@ shared_scripts {
 
 files {
     'locales/*.json',
+    'types.lua',
     'jobs/*.lua'
 }
 
