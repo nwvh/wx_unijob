@@ -23,7 +23,7 @@ function fixCar(veh)
         SetVehicleDeformationFixed(veh)
         SetVehicleUndriveable(veh, false)
         SetVehicleEngineOn(vehicle, true, true)
-        lib.callback.await("wx_unijob:crafting:removeItem", false, wx.Client.repairItem, 1)
+        lib.callback.await("wx_unijob:crafting:removeItem", false, wx.Items["repair"].item, wx.Items["repair"].count)
     end
 
     local player = lib.callback.await("wx_unijob:logs:getPlayer", false, source)

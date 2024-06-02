@@ -67,6 +67,8 @@ exports.wx_unijob:openCloakroom()
 | ✅      | Item Collecting Points       | Done and Functional                                                                                     |
 | ✅      | Sell Points                  | Done and Functional                                                                                     |                                                                                        |
 | ❌      | Duty system                  | TODO                                                                                                    |
+| ❌      | ox_menus                     | TODO                                                                                                    |
+| ❌      | esx_menus                    | TODO                                                                                                    |
 
 # Credits
 

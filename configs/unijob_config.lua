@@ -1,13 +1,16 @@
 wx = {}
 
-wx.radialMenus = false                                             -- Enables radial menu support
-wx.handcuffsItem = "money"                                         -- Item for the handcuffs
+wx.radialMenus = false                                 -- Enables radial menu support
+wx.handcuffsItem = "money"                             -- Item for the handcuffs
 wx.Items = {
-    ["handcuffs"] = { item = "handcuffs", count = 1 },             -- Item(s) needed to handcuff players
-    ["revive"] = { item = "medikit", count = 1 },                  -- Item(s) needed to revive players
-    ["heal"] = { item = "bandage", count = 1 },                    -- Item(s) needed to heal players
+    ["handcuffs"] = { item = "handcuffs", count = 1 }, -- Item(s) needed to handcuff players
+    ["revive"] = { item = "medikit", count = 1 },      -- Item(s) needed to revive players
+    ["heal"] = { item = "bandage", count = 1 },        -- Item(s) needed to heal players
+    ["repair"] = { item = "repairkit", count = 1 },
+    ["lockpick"] = { item = "lockpick", count = 1 },
 }
 wx.handcuffsCanBreak = true                                        -- Enables skill check when being handcuffed, when success, player will be able to flee
+wx.needLockpick = true                                             -- Does player need lockpick to hijack vehicle
 
 wx.Crafting = {                                                    -- Crafting options
     {
