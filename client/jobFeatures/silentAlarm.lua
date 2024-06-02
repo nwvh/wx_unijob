@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 local cooldown = {}
 CreateThread(
     function()
@@ -7,7 +9,7 @@ CreateThread(
                 exports.ox_target:addSphereZone(
                     {
                         coords = coord,
-                        radius = 2.0,
+                        radius = 0.5,
                         drawSprite = true,
                         options = {
                             {

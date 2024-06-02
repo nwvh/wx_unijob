@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 CreateThread(
     function()
         for job, v in pairs(wx.Jobs) do

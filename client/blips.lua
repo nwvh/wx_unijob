@@ -1,3 +1,20 @@
+wx.WaitForJobs = function()
+    local loaded = false
+    while true do
+        while not wx.Jobs do
+            Wait(100)
+        end
+        loaded = true
+        break
+    end
+
+    if not loaded then
+        Wait(1000)
+    end
+end
+
+wx.WaitForJobs()
+
 CreateThread(
     function()
         for _, data in pairs(wx.Jobs) do

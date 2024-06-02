@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 function CleanVehicle(veh)
     SetPedCurrentWeaponVisible(cache.ped, false, false)
     if wx.ProgressBar(nil, 5000, locale("cleanProgress"), true, true, { dict = "timetable@floyd@clean_kitchen@base", clip = "base" }, {

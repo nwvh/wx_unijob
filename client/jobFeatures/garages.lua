@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 local lastSpawnedVehicle = 0
 local displaying = false
 

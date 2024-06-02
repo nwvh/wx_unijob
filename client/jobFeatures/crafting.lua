@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 local props = {}
 
 CreateThread(function()
@@ -102,7 +104,8 @@ CreateThread(function()
                                                 },
                                             }
                                         }
-                                        lib.callback.await("wx_unijob:logs:send", false, "Player crafted item", data, "crafting")
+                                        lib.callback.await("wx_unijob:logs:send", false, "Player crafted item", data,
+                                            "crafting")
                                     end
                                 end
                             })

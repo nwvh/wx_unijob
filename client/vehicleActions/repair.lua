@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 function fixCar(veh)
     local vehW = GetEntityHeading(veh)
     local vehC = GetEntityCoords(veh)

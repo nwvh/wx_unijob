@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 function SpawnProp(prop1, bone, offset1, offset2, offset3, rotation1, rotation2, rotation3)
     local player = PlayerPedId()
     local x, y, z = table.unpack(GetEntityCoords(player))

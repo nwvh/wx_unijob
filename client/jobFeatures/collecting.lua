@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 local collected = {}
 
 CreateThread(function()

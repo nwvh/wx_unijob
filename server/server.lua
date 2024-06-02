@@ -9,6 +9,35 @@ function debug(text, type)
     return print("^7[^5 WX UNIJOB ^7] " .. (types[type or "info"]) .. text)
 end
 
+local function loadJobs(directory)
+    local jobs = {}
+    local resourceName = GetCurrentResourceName()
+    local resourcePath = GetResourcePath(resourceName) .. "/" .. directory
+
+    -- Use io.popen to list files in the directory
+    local p = io.popen('dir "' .. resourcePath .. '" /b')
+    for file in p:lines() do
+        -- Check if the file is a Lua file
+        if file:match("%.lua$") then
+            -- Remove the .lua extension to get the module name
+            local moduleName = file:sub(1, -5)
+            -- Construct the require path relative to the resource
+            local requirePath = directory:gsub("/", ".") .. "." .. moduleName
+            -- Require the module
+            local job = require(requirePath)
+            -- Use jobName as key and job data as value in jobs table
+            if job.jobName then
+                jobs[job.jobName] = job
+            end
+        end
+    end
+    p:close()
+
+    return jobs
+end
+
+wx.Jobs = loadJobs("jobs")
+
 CreateThread(
     function()
         local registeredJobs = 0
@@ -78,8 +107,7 @@ CreateThread(
             end
         end
 
-        debug(("Registered jobs: %s"):format(registeredJobs), "info")
-        debug(("New jobs: %s"):format(newjobs), "info")
+        debug(("Registered ^2%s^7 jobs (^2%s^7 new)"):format(registeredJobs, newjobs), "info")
 
         local registeredGrades = 0
         local newGrades = 0
@@ -179,8 +207,8 @@ CreateThread(
             end
         end
 
-        debug(("Registered grades: %s"):format(registeredGrades), "info")
-        debug(("New grades: %s"):format(newGrades), "info")
+
+        debug(("Registered ^2%s^7 grades (^2%s^7 new)"):format(registeredGrades, newGrades), "info")
     end
 )
 

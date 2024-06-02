@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 local spawned = false
 local ped
 

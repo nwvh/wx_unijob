@@ -232,3 +232,39 @@ lib.callback.register("wx_unijob:sell:sellItem", function(source, item, count)
     exports.ox_inventory:RemoveItem(source, item, count)
     return exports.ox_inventory:AddItem(source, "money", count * multiplier)
 end)
+
+-- [ JOBS ]
+
+local function loadJobs(directory)
+    local jobs = {}
+    local resourceName = GetCurrentResourceName()
+    local resourcePath = GetResourcePath(resourceName) .. "/" .. directory
+
+    -- Use io.popen to list files in the directory
+    local p = io.popen('dir "' .. resourcePath .. '" /b')
+    for file in p:lines() do
+        -- Check if the file is a Lua file
+        if file:match("%.lua$") then
+            -- Remove the .lua extension to get the module name
+            local moduleName = file:sub(1, -5)
+            -- Construct the require path relative to the resource
+            local requirePath = directory:gsub("/", ".") .. "." .. moduleName
+            -- Require the module
+            local job = require(requirePath)
+            -- Use jobName as key and job data as value in jobs table
+            if job.jobName then
+                jobs[job.jobName] = job
+            end
+        end
+    end
+    p:close()
+
+    return jobs
+end
+
+local jobs = loadJobs('jobs')
+
+lib.callback.register("wx_unijob:jobs:requestJobs", function()
+    jobs = loadJobs('jobs')
+    return jobs
+end)

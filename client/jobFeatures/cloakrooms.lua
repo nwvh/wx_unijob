@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 local displaying = false
 
 CreateThread(

@@ -1,4 +1,5 @@
 if not wx.radialMenus then return end
+wx.WaitForJobs()
 
 exports('handcuffHandler', function(menu, item)
     print(menu, item)

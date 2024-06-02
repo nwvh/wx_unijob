@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 function Lockpick(veh)
     if wx.Client.Lockpick() then
         wx.Client.Notify(locale("lockpickTitle"), locale("lockpickSuccess"), "success", "lock-open")

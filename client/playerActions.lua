@@ -1,3 +1,5 @@
+wx.WaitForJobs()
+
 local cuffed = false
 local canEscape = true
 
