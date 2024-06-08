@@ -1,6 +1,7 @@
 lib.callback.register(
     "wx_unijob:idcard:request",
     function()
+        local starttime = GetGameTimer()
         local alert =
             lib.alertDialog(
                 {
@@ -19,6 +20,10 @@ lib.callback.register(
             sex = playerData.sex == "m" and "Male" or "Female",
             height = playerData.height
         }
+        if (GetGameTimer() - starttime > 5) and alert ~= "confirm" then -- Wait 5 seconds for the player to choose an option
+            lib.closeAlertDialog()
+            return false
+        end
         return alert == "confirm" and data or false
     end
 )
