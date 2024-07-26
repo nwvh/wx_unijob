@@ -3,7 +3,7 @@ name: Bug report
 about: Use this when you find any bugs when using this resource
 title: "[BUG]"
 labels: bug
-assignees: nwvh, hoaxik
+assignees: hoaxik, nwvh
 
 ---
 
