@@ -7,6 +7,7 @@
 WX UniJob is an advanced system for creating and managing all your jobs with a single resource.
 ## Dependencies
 * [ox_lib](https://github.com/overextended/ox_lib) - Used for UI, callbacks and more
+* [ox_target](https://github.com/overextended/ox_target) - 99% of interactions
 * [WX Bridge](https://github.com/nwvh/wx_bridge) - Custom bridge module that adds support for ESX & QB
 
 # Screenshots
@@ -25,9 +26,6 @@ WX UniJob is an advanced system for creating and managing all your jobs with a s
 ![unijob-screenshot](./.assets/image-9.png)
 ![unijob-screenshot](./.assets/silentalarm.png)
 </details>
-
-# Config File
-![unijob-config](./.assets/configfile.png)
 
 # Exports
 ```lua
