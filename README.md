@@ -83,5 +83,5 @@ exports.wx_unijob:openCloakroom()
 * * ... and a lot more!
 
 ### Outlaw Scripts
-https://store.outlawscripts.xyz/
-https://discord.com/8m9KdwPHub
+* [Tebex Store](https://store.outlawscripts.xyz/)
+* [Discord Server](https://discord.com/8m9KdwPHub)
