@@ -81,3 +81,7 @@ exports.wx_unijob:openCloakroom()
 * * Vehicle Repair
 * * Client functions
 * * ... and a lot more!
+
+### Outlaw Scripts
+https://store.outlawscripts.xyz/
+https://discord.com/8m9KdwPHub
